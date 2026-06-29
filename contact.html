@@ -127,6 +127,24 @@
     .hero-promise-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mid); animation: pulse-live 2.4s ease-in-out infinite; }
     @keyframes pulse-live { 0%,100% { box-shadow: 0 0 0 0 rgba(125,173,92,0.55); } 60% { box-shadow: 0 0 0 5px rgba(125,173,92,0); } }
 
+    /* ─── CONTACT HERO LAYOUT ───────────────────────────── */
+    .contact-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .contact-hero-video {
+      width: 100%;
+      border-radius: 8px;
+      opacity: 0.85;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .contact-hero-inner { grid-template-columns: 1fr; }
+      .contact-hero-graphic { display: none; }
+    }
+
     /* ─── MAIN CONTENT ───────────────────────────────────── */
     #contact-main {
       padding: 7rem 0;
@@ -399,12 +417,30 @@
 <!-- ════════════ PAGE HERO ════════════ -->
 <section class="page-hero">
   <div class="wrap">
-    <p class="page-hero-kicker reveal">Get in Touch</p>
-    <h1 class="page-hero-h1 reveal d1">Start a Project.<br><em>Let's build something great.</em></h1>
-    <p class="page-hero-sub reveal d2">Tell us about your product and goals — we'll respond with a clear path forward and a quote within 48 hours. No jargon, no runaround.</p>
-    <div class="hero-promise reveal d3">
-      <span class="hero-promise-dot"></span>
-      <span>Response within 48 hours</span>
+    <div class="contact-hero-inner">
+
+      <!-- LEFT: text -->
+      <div>
+        <p class="page-hero-kicker reveal">Get in Touch</p>
+        <h1 class="page-hero-h1 reveal d1">Start a Project.<br><em>Let's build something great.</em></h1>
+        <p class="page-hero-sub reveal d2">Tell us about your product and goals — we'll respond with a clear path forward and a quote within 48 hours. No jargon, no runaround.</p>
+        <div class="hero-promise reveal d3">
+          <span class="hero-promise-dot"></span>
+          <span>Response within 48 hours</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: process animation (desktop only) -->
+      <video
+        class="contact-hero-video reveal d2"
+        src="brand_assets/ProcessAnimation.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        aria-hidden="true"
+      ></video>
+
     </div>
   </div>
 </section>
@@ -574,7 +610,7 @@
     <div class="footer-row">
       <div>
         <img src="brand_assets/KPI Kelker Logo (no box).png" alt="Kelker Pharma" class="footer-logo">
-        <p class="footer-tagline">Pharmaceutical-grade supplement manufacturing near Los Angeles, CA.</p>
+        <p class="footer-tagline">Pharmaceutical-grade supplement manufacturing in Riverside, CA.</p>
       </div>
       <div>
         <p class="footer-col-label">Company</p>
