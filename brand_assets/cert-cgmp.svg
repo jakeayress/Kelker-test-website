@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 110" width="90" height="110">
+  <!-- Shield -->
+  <path d="M45 4 L82 18 L82 56 Q82 84 45 104 Q8 84 8 56 L8 18 Z" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+  <path d="M45 10 L76 22 L76 55 Q76 80 45 98 Q14 80 14 55 L14 22 Z" fill="rgba(255,255,255,0.05)"/>
+  <!-- Text -->
+  <text x="45" y="52" font-family="Arial Black, Arial" font-weight="900" font-size="19" fill="#ffffff" text-anchor="middle" letter-spacing="1">cGMP</text>
+  <line x1="20" y1="58" x2="70" y2="58" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="45" y="69" font-family="Arial, sans-serif" font-size="6" fill="rgba(255,255,255,0.55)" text-anchor="middle" letter-spacing="1.8">CERTIFIED</text>
+  <text x="45" y="79" font-family="Arial, sans-serif" font-size="5.5" fill="rgba(255,255,255,0.38)" text-anchor="middle" letter-spacing="1.2">MANUFACTURING</text>
+</svg>

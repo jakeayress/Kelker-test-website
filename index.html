@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelker Pharma — Premium Supplement Manufacturing</title>
+  <meta name="description" content="Pharmaceutical-grade contract manufacturing for dietary supplement and wellness brands. cGMP-certified. FDA-registered. 75,000 sq ft near Los Angeles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ──────────────────────────────────────────── */
+    :root {
+      --green:       #4B7A3C;
+      --dark:        #1C2E17;
+      --mid:         #7DAD5C;
+      --light:       #B2D09E;
+      --pale:        #E6F0E1;
+      --ghost:       #F4F8F2;
+      --warm-white:  #FAFAF5;
+      --parchment:   #F2EEE6;
+      --charcoal:    #1A1A1A;
+      --stone:       #5A5A5A;
+      --silver:      #C0C0BC;
+      --divider:     #E2DDD8;
+    }
+
+    /* ─── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── LAYOUT HELPERS ──────────────────────────────────── */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    @media (max-width: 700px) { .wrap { padding: 0 1.5rem; } }
+
+    /* ─── SECTION LABEL ───────────────────────────────────── */
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--green);
+      opacity: 0.22;
+    }
+    .eyebrow--light { color: var(--mid); }
+    .eyebrow--light::after { background: var(--mid); }
+
+    /* ─── BUTTONS ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+    .btn:active { transform: translateY(1px); }
+
+    .btn--solid {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .btn--solid:hover {
+      background: var(--dark);
+      border-color: var(--dark);
+      box-shadow: 0 6px 20px rgba(28,46,23,0.24);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--green);
+      border-color: rgba(75,122,60,0.38);
+    }
+    .btn--outline:hover {
+      background: rgba(75,122,60,0.06);
+      border-color: var(--green);
+    }
+
+    .btn--white {
+      background: #fff;
+      color: var(--dark);
+      border-color: #fff;
+    }
+    .btn--white:hover {
+      background: var(--warm-white);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn--ghost-white {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.35);
+    }
+    .btn--ghost-white:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.7);
+      color: #fff;
+    }
+
+    /* ─── NAVIGATION ──────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: box-shadow 0.3s ease;
+    }
+    #nav.is-scrolled {
+      box-shadow: 0 2px 28px rgba(0,0,0,0.35);
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      gap: 2rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo img {
+      height: 62px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+    .nav-logo:hover img { opacity: 0.72; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.25rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--mid);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s ease;
+    }
+    .nav-links a:hover { color: rgba(255,255,255,0.92); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid rgba(125,173,92,0.38);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover {
+      background: rgba(125,173,92,0.1);
+      border-color: var(--mid);
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ─── HERO VIDEO BACKGROUND ──────────────────────────────── */
+    .hero-video-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Dark gradient overlay — keeps left text readable, lets right side breathe */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(8,14,6,0.82) 0%, rgba(8,14,6,0.60) 42%, rgba(8,14,6,0.18) 75%, rgba(8,14,6,0.08) 100%),
+        linear-gradient(to top, rgba(8,14,6,0.5) 0%, transparent 35%);
+    }
+
+    /* Noise grain for depth */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      opacity: 0.25;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      min-height: calc(100vh - 72px);
+    }
+
+    /* LEFT COLUMN */
+    .hero-text { padding: 4rem 0; }
+
+    .hero-kicker {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.57rem;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.1s ease forwards;
+    }
+
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.4rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.18s ease forwards;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--light);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      max-width: 50ch;
+      margin: 2rem 0 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.26s ease forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.34s ease forwards;
+    }
+    .hero-ctas .btn--outline {
+      color: rgba(255,255,255,0.82);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .hero-ctas .btn--outline:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.65);
+      color: #fff;
+    }
+
+    .hero-proof-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.44s ease forwards;
+    }
+    .proof-stat {}
+    .proof-stat-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1;
+    }
+    .proof-stat-val span { color: var(--mid); }
+    .proof-stat-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-top: 0.28rem;
+    }
+
+    /* Right column hidden — video fills full background */
+    .hero-visual { display: none; }
+
+    /* ─── PRODUCTION STATUS PANEL (saved — uncomment to restore) ─
+    .vis-panel { width:400px; background:var(--dark); border:1px solid rgba(125,173,92,0.18); border-top:1px solid rgba(125,173,92,0.38); border-radius:14px; overflow:hidden; position:relative; box-shadow:0 40px 90px rgba(28,46,23,0.45),0 12px 32px rgba(28,46,23,0.28),inset 0 1px 0 rgba(255,255,255,0.04); }
+    .vis-panel::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(125,173,92,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(125,173,92,0.025) 1px,transparent 1px); background-size:22px 22px; pointer-events:none; border-radius:14px; }
+    .vp-header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.06); position:relative; }
+    .vp-title { font-family:'Space Mono',monospace; font-size:0.54rem; letter-spacing:0.24em; color:rgba(255,255,255,0.38); text-transform:uppercase; }
+    .vp-live { display:flex; align-items:center; gap:0.45rem; font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.2em; color:var(--mid); text-transform:uppercase; }
+    .vp-live-dot { width:6px; height:6px; border-radius:50%; background:var(--mid); animation:pulse-live 2.4s ease-in-out infinite; }
+    @keyframes pulse-live { 0%,100% { box-shadow:0 0 0 0 rgba(125,173,92,0.55); } 60% { box-shadow:0 0 0 5px rgba(125,173,92,0); } }
+    .vp-body { padding:1.4rem 1.5rem; display:flex; flex-direction:column; gap:1.25rem; position:relative; }
+    .vp-row { display:flex; flex-direction:column; gap:0.5rem; opacity:0; animation:fadeUp 0.45s ease forwards; }
+    .vp-row:nth-child(1) { animation-delay:0.75s; } .vp-row:nth-child(2) { animation-delay:0.92s; }
+    .vp-row-top { display:flex; align-items:center; justify-content:space-between; }
+    .vp-label { font-family:'Space Mono',monospace; font-size:0.48rem; letter-spacing:0.2em; color:rgba(255,255,255,0.32); text-transform:uppercase; }
+    .vp-val { font-family:'Space Mono',monospace; font-size:0.52rem; letter-spacing:0.1em; color:var(--mid); }
+    .vp-bar-track { height:3px; background:rgba(255,255,255,0.06); border-radius:100px; overflow:hidden; }
+    .vp-bar-fill { height:100%; width:0%; border-radius:100px; background:linear-gradient(90deg,var(--green) 0%,var(--mid) 100%); animation:vp-bar-grow 1.8s cubic-bezier(0.4,0,0.2,1) 1.1s forwards; }
+    @keyframes vp-bar-grow { to { width:99.8%; } }
+    .vp-cert-dots { display:flex; gap:0.38rem; align-items:center; }
+    .vp-cert-dot { width:7px; height:7px; border-radius:50%; background:rgba(125,173,92,0.2); animation:dot-on 0.25s ease forwards; }
+    .vp-cert-dot:nth-child(1){animation-delay:1.05s} .vp-cert-dot:nth-child(2){animation-delay:1.15s} .vp-cert-dot:nth-child(3){animation-delay:1.25s} .vp-cert-dot:nth-child(4){animation-delay:1.35s} .vp-cert-dot:nth-child(5){animation-delay:1.45s} .vp-cert-dot:nth-child(6){animation-delay:1.55s} .vp-cert-dot:nth-child(7){animation-delay:1.65s}
+    @keyframes dot-on { to { background:var(--mid); box-shadow:0 0 5px rgba(125,173,92,0.45); } }
+    .vp-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.05); border-top:1px solid rgba(255,255,255,0.05); position:relative; }
+    .vp-stat { display:flex; flex-direction:column; gap:0.22rem; padding:1rem 1.5rem; background:var(--dark); opacity:0; animation:fadeUp 0.4s ease forwards; }
+    .vp-stat:nth-child(1){animation-delay:1.1s} .vp-stat:nth-child(2){animation-delay:1.2s} .vp-stat:nth-child(3){animation-delay:1.3s} .vp-stat:nth-child(4){animation-delay:1.4s}
+    .vp-stat-num { font-family:'Space Mono',monospace; font-size:1rem; font-weight:700; color:#fff; letter-spacing:0.02em; line-height:1; }
+    .vp-stat-lbl { font-family:'Space Mono',monospace; font-size:0.42rem; letter-spacing:0.18em; color:rgba(255,255,255,0.28); text-transform:uppercase; }
+    .vp-footer { padding:0.7rem 1.5rem; border-top:1px solid rgba(255,255,255,0.05); font-family:'Space Mono',monospace; font-size:0.42rem; letter-spacing:0.16em; color:rgba(255,255,255,0.18); text-transform:uppercase; position:relative; }
+    ─── END SAVED PANEL ─────────────────────────────────────── */
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── HERO CURSOR LIGHT ───────────────────────────────── */
+    .hero-cursor-light {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+      background: radial-gradient(
+        700px circle at var(--cursor-x, 50%) var(--cursor-y, 45%),
+        rgba(75,122,60,0.09) 0%, transparent 68%
+      );
+      opacity: 0;
+      transition: opacity 0.6s ease, background 0.08s linear;
+    }
+    #hero:hover .hero-cursor-light { opacity: 1; }
+
+    /* ─── HERO PARTICLES ─────────────────────────────────── */
+    .hero-particles {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--green);
+      animation: particle-float linear infinite;
+      will-change: transform, opacity;
+    }
+    @keyframes particle-float {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      8%   { opacity: var(--p-op, 0.15); }
+      88%  { opacity: var(--p-op, 0.15); }
+      100% { transform: translateY(-110px) translateX(var(--p-dx, 18px)); opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-kicker, .hero-h1, .hero-sub, .hero-ctas,
+      .hero-proof-row, .hero-visual {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+      .particle { display: none; }
+    }
+
+    /* ─── PROOF BAR ───────────────────────────────────────── */
+    #proof {
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .proof-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .proof-item {
+      padding: 2rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .proof-item:last-child { border-right: none; }
+    .proof-icon {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(75,122,60,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .proof-icon svg {
+      width: 15px; height: 15px;
+      stroke: var(--mid); fill: none;
+      stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .proof-title {
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.02em;
+      display: block;
+    }
+    .proof-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────── */
+    #about { padding: 9rem 0; background: var(--warm-white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 7rem;
+      align-items: start;
+    }
+
+    .about-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+    .about-body {
+      font-size: 0.91rem;
+      color: var(--stone);
+      line-height: 1.82;
+      margin-bottom: 1.1rem;
+    }
+    .text-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1rem;
+      transition: gap 0.2s ease;
+    }
+    .text-link:hover { gap: 0.9rem; }
+
+    .about-right { display: flex; flex-direction: column; gap: 2px; background: var(--divider); }
+
+    .quote-card {
+      background: var(--parchment);
+      padding: 3.5rem;
+      border-left: 3px solid var(--green);
+    }
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 2vw, 1.65rem);
+      font-weight: 300; line-height: 1.5;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+    .quote-attr {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--green);
+    }
+
+    .stats-card {
+      background: #fff;
+      padding: 2.5rem 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .stat-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 300;
+      line-height: 1; color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+    .stat-big em { color: var(--green); font-style: normal; }
+    .stat-small {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--silver);
+    }
+
+    /* ─── CAPABILITIES ────────────────────────────────────── */
+    #capabilities {
+      padding: 9rem 0;
+      background: var(--parchment);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Capsule photo background + gradient veil */
+    .caps-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 0;
+    }
+    #capabilities::before {
+      content: '';
+      position: absolute; inset: 0;
+      z-index: 1; pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(242,238,230,0.97) 0%,
+        rgba(242,238,230,0.84) 26%,
+        rgba(242,238,230,0.52) 54%,
+        rgba(242,238,230,0.64) 100%
+      );
+    }
+    #capabilities > .wrap { position: relative; z-index: 2; }
+
+    .caps-header {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem; align-items: end;
+      margin-bottom: 4rem;
+    }
+    .section-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--charcoal);
+    }
+    .section-intro {
+      font-size: 0.91rem; color: var(--stone); line-height: 1.82;
+    }
+
+    .caps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .cap-card {
+      background: #fff;
+      padding: 2.75rem 2.25rem;
+      position: relative;
+      border-radius: 14px;
+      box-shadow:
+        0 2px 6px rgba(28,46,23,0.04),
+        0 8px 24px rgba(28,46,23,0.08);
+      transition:
+        background 0.3s ease,
+        transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+        box-shadow 0.35s ease,
+        z-index 0s;
+    }
+    .cap-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--mid));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+      border-radius: 14px 14px 0 0;
+    }
+    .cap-card:hover {
+      background: var(--ghost);
+      transform: translateY(-6px);
+      z-index: 5;
+      box-shadow:
+        0 4px 10px rgba(28,46,23,0.05),
+        0 16px 40px rgba(28,46,23,0.11),
+        0 32px 56px rgba(28,46,23,0.06);
+    }
+    .cap-card:hover::before { transform: scaleX(1); }
+
+    /* ─── CARD HOVER PREVIEW ─────────────────────────────── */
+    .cap-preview {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0; right: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 12px rgba(28,46,23,0.10),
+        0 12px 32px rgba(28,46,23,0.14);
+      opacity: 0;
+      transform: translateY(10px) scale(0.97);
+      transition:
+        opacity 0.28s ease,
+        transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .cap-preview-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+    .cap-card:hover .cap-preview {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    /* Mobile tap: use .active class instead of :hover */
+    @media (hover: none) {
+      .cap-card:hover .cap-preview { opacity: 0; transform: translateY(10px) scale(0.97); }
+      .cap-card.active { background: var(--ghost); transform: translateY(-6px); z-index: 5; }
+      .cap-card.active::before { transform: scaleX(1); }
+      .cap-card.active .cap-preview { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .cap-icon {
+      width: 36px; height: 36px;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cap-icon svg {
+      width: 32px; height: 32px;
+      stroke: var(--green); fill: none;
+      stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .cap-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--charcoal); margin-bottom: 0.75rem; line-height: 1.2;
+    }
+    .cap-desc { font-size: 0.78rem; color: var(--stone); line-height: 1.72; }
+
+    /* ─── PHOTO ACCENTS (used inside existing sections) ─── */
+    .photo-accent {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      display: block;
+      box-shadow:
+        0 16px 40px rgba(28,46,23,0.10),
+        0 4px 12px rgba(28,46,23,0.06);
+    }
+    .photo-accent img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .photo-accent--about {
+      aspect-ratio: 16 / 9;
+      margin-bottom: 1.5rem;
+    }
+    .photo-accent--caps {
+      aspect-ratio: 21 / 9;
+      margin-top: 3rem;
+    }
+    .photo-accent--why {
+      aspect-ratio: 4 / 3;
+      margin: 0.25rem 0 0.25rem;
+      border-radius: 8px;
+    }
+
+    /* ─── PROCESS ─────────────────────────────────────────── */
+    #process {
+      padding: 9rem 0;
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    .process-glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 50% 75% at 80% 50%,
+        rgba(75,122,60,0.1) 0%, transparent 62%);
+      animation: glow-breathe 18s ease-in-out infinite;
+      transform-origin: 80% 50%;
+    }
+    @keyframes glow-breathe {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.12); }
+    }
+
+    /* ─── PROCESS PROGRESS ───────────────────────────────── */
+    .process-progress-wrap {
+      position: relative;
+      margin-bottom: 3.5rem;
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+    }
+    #process-progress-fill {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      background: linear-gradient(90deg, var(--mid), rgba(125,173,92,0.25));
+      width: 0%;
+      transition: width 0.12s ease;
+    }
+    .process-progress-dots {
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 12%;
+    }
+    .process-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .process-dot.lit {
+      background: var(--mid);
+      border-color: var(--mid);
+      transform: scale(1.6);
+    }
+
+    .process-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: #fff;
+      margin-bottom: 4rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px; background: rgba(255,255,255,0.07);
+    }
+    .step {
+      background: rgba(255,255,255,0.03);
+      padding: 3rem 2.5rem;
+      transition: background 0.25s ease;
+    }
+    .step:hover { background: rgba(255,255,255,0.07); }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.8rem; font-weight: 300;
+      color: rgba(125,173,92,0.2); line-height: 1;
+      display: block; margin-bottom: 1.5rem;
+    }
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300;
+      color: #fff; margin-bottom: 0.75rem;
+    }
+    .step-desc { font-size: 0.8rem; color: rgba(255,255,255,0.42); line-height: 1.72; }
+
+    /* Connector dots between steps */
+    .steps-connector {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 3rem; opacity: 0.3;
+    }
+    .sc-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--mid); flex-shrink: 0;
+    }
+    .sc-line { flex: 1; height: 1px; background: var(--mid); }
+
+    /* ─── WHY KELKER ──────────────────────────────────────── */
+    #why { padding: 9rem 0; background: var(--warm-white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 7rem; align-items: start;
+    }
+
+    .why-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+    .why-body { font-size: 0.91rem; color: var(--stone); line-height: 1.82; margin-bottom: 2.5rem; }
+
+    .why-items { display: flex; flex-direction: column; }
+    .why-item {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--divider);
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1rem; align-items: start;
+      transition: background 0.2s ease, padding 0.2s ease;
+    }
+    .why-item:first-child { border-top: 1px solid var(--divider); }
+    .why-item:hover {
+      background: var(--ghost);
+      padding-left: 0.8rem; padding-right: 0.8rem;
+    }
+    .why-n {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.14em;
+      color: var(--green); padding-top: 0.2rem;
+    }
+    .why-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--charcoal); margin-bottom: 0.35rem; line-height: 1.25;
+    }
+    .why-desc { font-size: 0.8rem; color: var(--stone); line-height: 1.7; }
+
+    /* ─── CTA SECTION ─────────────────────────────────────── */
+    #cta {
+      padding: 9rem 0;
+      background: var(--green);
+      position: relative; overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 48% 80% at 8% 50%, rgba(28,46,23,0.48) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 55% at 92% 20%, rgba(125,173,92,0.2) 0%, transparent 55%);
+      animation: cta-breathe 14s ease-in-out infinite;
+    }
+    @keyframes cta-breathe {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.55; }
+    }
+    .cta-grain {
+      position: absolute; inset: 0; opacity: 0.4; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .cta-kicker {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.56rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: rgba(255,255,255,0.48);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .cta-kicker::after { content: ''; flex: 0 0 60px; height: 1px; background: rgba(255,255,255,0.18); }
+    .cta-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.025em; color: #fff;
+      margin-bottom: 1.25rem;
+    }
+    .cta-sub { font-size: 0.92rem; color: rgba(255,255,255,0.65); line-height: 1.75; }
+    .cta-actions { display: flex; flex-direction: column; gap: 1rem; }
+    .cta-note {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── CERTIFICATIONS MARQUEE ─────────────────────────── */
+    #certs {
+      padding: 3.5rem 0;
+      background: var(--dark);
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .certs-eyebrow {
+      text-align: center;
+      margin-bottom: 2.75rem;
+    }
+
+    /* Fade edges */
+    .marquee-viewport {
+      position: relative;
+      overflow: hidden;
+    }
+    .marquee-viewport::before,
+    .marquee-viewport::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 140px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-viewport::before {
+      left: 0;
+      background: linear-gradient(to right, var(--dark) 0%, transparent 100%);
+    }
+    .marquee-viewport::after {
+      right: 0;
+      background: linear-gradient(to left, var(--dark) 0%, transparent 100%);
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: max-content;
+      animation: marquee-ltr 38s linear infinite;
+    }
+
+    /* Pause on hover */
+    .marquee-viewport:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee-ltr {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+
+    .cert-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+      padding: 0 3.5rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      min-width: 180px;
+    }
+
+    .cert-logo {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.72;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .cert-item:hover .cert-logo {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+
+    .cert-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+
+    .cert-item:hover .cert-label {
+      color: var(--mid);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    #footer { background: var(--dark); color: #fff; }
+
+    .footer-main {
+      padding: 5rem 0 3.5rem;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand img {
+      height: 36px; width: auto;
+      filter: brightness(0) invert(1);
+      display: block; margin-bottom: 1.5rem;
+    }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.42); margin-bottom: 0.4rem;
+    }
+    .footer-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.2);
+    }
+    .col-head {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      display: block; margin-bottom: 1.25rem;
+    }
+    .col-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .col-list a {
+      font-size: 0.84rem; color: rgba(255,255,255,0.48);
+      text-decoration: none; transition: color 0.2s ease;
+    }
+    .col-list a:hover { color: rgba(255,255,255,0.9); }
+    .footer-email {
+      font-size: 0.88rem; color: rgba(255,255,255,0.62);
+      text-decoration: none; display: block; margin-bottom: 0.35rem;
+      transition: color 0.2s ease;
+    }
+    .footer-email:hover { color: rgba(255,255,255,0.9); }
+    .footer-url {
+      font-family: 'Space Mono', monospace; font-size: 0.52rem;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.25);
+    }
+
+    .footer-bottom {
+      padding: 1.75rem 0;
+      display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.18);
+    }
+    .cert-pills { display: flex; gap: 0.65rem; flex-wrap: wrap; }
+    .cert-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.45rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2); padding: 0.28rem 0.7rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ─── SCROLL REVEAL ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .caps-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero-text { padding: 3.5rem 0; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      #about  { padding: 5.5rem 0; }
+      #capabilities { padding: 5.5rem 0; }
+      #process { padding: 5.5rem 0; }
+      #why    { padding: 5.5rem 0; }
+      #cta    { padding: 5.5rem 0; }
+
+      .about-grid  { grid-template-columns: 1fr; gap: 3rem; }
+      .caps-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .why-grid    { grid-template-columns: 1fr; gap: 3rem; }
+      .cta-inner   { grid-template-columns: 1fr; gap: 3rem; }
+      .stats-card  { grid-template-columns: 1fr 1fr; }
+
+      .proof-bar   { grid-template-columns: repeat(2, 1fr); }
+      .proof-item:nth-child(2) { border-right: none; }
+      .proof-item:nth-child(3),
+      .proof-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.06); }
+
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .caps-grid   { grid-template-columns: 1fr; }
+      .steps-grid  { grid-template-columns: 1fr; }
+      .proof-bar   { grid-template-columns: 1fr; }
+      .proof-item  { border-right: none !important; border-top: 1px solid rgba(255,255,255,0.06); }
+      .proof-item:first-child { border-top: none; }
+      .footer-main { grid-template-columns: 1fr; }
+      .hero-proof-row { gap: 1.5rem; flex-wrap: wrap; }
+    }
+    /* ─── INTRO OVERLAY ─────────────────────────────────── */
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ NAVIGATION ════════════════ -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="#" class="nav-logo" aria-label="Kelker Pharma — Home">
+        <img src="brand_assets/KPI Kelker Logo (no box).png" alt="Kelker Pharma">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="about.html">About</a></li>
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#why">Why Kelker</a></li>
+        <li><a href="#certs">Certifications</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="hero">
+  <!-- Full-bleed background video -->
+  <div class="hero-video-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="brand_assets/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <!-- Dark gradient overlay for text readability -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-grain"></div>
+  <div id="hero-particles" class="hero-particles" aria-hidden="true"></div>
+  <div class="hero-cursor-light" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+
+      <!-- Text -->
+      <div class="hero-text">
+        <p class="hero-kicker">Kelker Pharma, Inc. &mdash; Los Angeles, CA</p>
+        <h1 class="hero-h1">
+          Supplement Manufacturing<br>Built on
+          <em>Uncompromising Quality.</em>
+        </h1>
+        <p class="hero-sub">Pharmaceutical-grade contract manufacturing for dietary supplement and wellness brands that demand consistency, traceability, and scale. cGMP-certified. FDA-registered. 75,000 sq ft of production near Los Angeles.</p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn btn--solid">Start a Project</a>
+          <a href="#capabilities" class="btn btn--outline">Explore Capabilities</a>
+        </div>
+        <div class="hero-proof-row">
+          <div class="proof-stat">
+            <div class="proof-stat-val" data-count="75" data-suffix="K"><span class="count-num">75</span><span>K</span></div>
+            <div class="proof-stat-lbl">Sq Ft Facility</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-val">M<span>+</span></div>
+            <div class="proof-stat-lbl">Units Daily</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-val" data-count="7" data-suffix="+"><span class="count-num">7</span><span>+</span></div>
+            <div class="proof-stat-lbl">Certifications</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-val" style="font-size:1.3rem;letter-spacing:.05em;">cGMP</div>
+            <div class="proof-stat-lbl">FDA Registered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAVED: Production Status Panel — uncomment to restore
+      <div class="hero-visual" aria-hidden="true">
+        <div class="vis-panel">
+          <div class="vp-header"><span class="vp-title">Facility Status</span><span class="vp-live"><span class="vp-live-dot"></span>Live</span></div>
+          <div class="vp-body">
+            <div class="vp-row"><div class="vp-row-top"><span class="vp-label">Batch Compliance</span><span class="vp-val">99.8%</span></div><div class="vp-bar-track"><div class="vp-bar-fill"></div></div></div>
+            <div class="vp-row"><div class="vp-row-top"><span class="vp-label">Active Certifications</span><span class="vp-val">7 of 7</span></div><div class="vp-cert-dots"><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div><div class="vp-cert-dot"></div></div></div>
+          </div>
+          <div class="vp-stats"><div class="vp-stat"><span class="vp-stat-num">48 hrs</span><span class="vp-stat-lbl">Quote Turnaround</span></div><div class="vp-stat"><span class="vp-stat-num">M+</span><span class="vp-stat-lbl">Units / Week</span></div><div class="vp-stat"><span class="vp-stat-num">75K</span><span class="vp-stat-lbl">Sq Ft Facility</span></div><div class="vp-stat"><span class="vp-stat-num">Est. 2015</span><span class="vp-stat-lbl">California Corp.</span></div></div>
+          <div class="vp-footer">FDA-Registered &middot; cGMP Certified &middot; Los Angeles, CA</div>
+        </div>
+      </div>
+      END SAVED PANEL -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROOF BAR ════════════════ -->
+<section id="proof">
+  <div class="wrap">
+    <div class="proof-bar">
+      <div class="proof-item">
+        <div class="proof-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div>
+          <span class="proof-title">cGMP Certified Facility</span>
+          <span class="proof-sub">FDA-Regulated Standards</span>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <span class="proof-title">Made in the USA</span>
+          <span class="proof-sub">Los Angeles, California</span>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div>
+          <span class="proof-title">Rigorous Quality Control</span>
+          <span class="proof-sub">In-House Testing &amp; Release</span>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <span class="proof-title">Full Production Suite</span>
+          <span class="proof-sub">Capsules · Tablets · Powders · Bars</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <p class="eyebrow">About Kelker Pharma</p>
+        <h2 class="about-h2">The manufacturing backbone behind leading supplement brands.</h2>
+        <p class="about-body">At Kelker Pharma, we are the partner brands turn to when quality cannot be compromised. Our cGMP-certified facility near Los Angeles operates at pharmaceutical-grade standards — because we believe the supplement industry deserves nothing less.</p>
+        <p class="about-body">From first formulation to final label, we manage every step of the production process with precision and accountability. Our experienced team handles capsules, tablets, powders, nutritional bars, and full packaging and fulfillment — all under one roof.</p>
+        <p class="about-body">We work with emerging brands and established manufacturers alike. Our direct-from-manufacturer model means faster turnaround, cleaner communication, and a partner invested in your success from concept to shelf.</p>
+        <a href="contact.html" class="text-link">Start a conversation &rarr;</a>
+      </div>
+
+      <div class="about-right reveal d1">
+        <div class="photo-accent photo-accent--about">
+          <img
+            src="brand_assets/Facility Photos/Handfill.jpg"
+            alt="Kelker Pharma team member hand-filling a powder product on the production floor"
+            width="960" height="521"
+            loading="lazy">
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">"You market. We make it." Kelker Pharma is the trusted manufacturing backbone behind some of the industry's most successful health and wellness brands.</p>
+          <span class="quote-attr">Kelker Pharma &mdash; Brand Positioning</span>
+        </div>
+        <div class="stats-card">
+          <div>
+            <div class="stat-big" data-count="75" data-suffix="K"><span class="count-num">75</span><em>K</em></div>
+            <div class="stat-small">Sq Ft Production</div>
+          </div>
+          <div>
+            <div class="stat-big">M<em>+</em></div>
+            <div class="stat-small">Units Per Day</div>
+          </div>
+          <div>
+            <div class="stat-big" data-count="7" data-suffix="+"><span class="count-num">7</span><em>+</em></div>
+            <div class="stat-small">Certifications</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CAPABILITIES ════════════════ -->
+<section id="capabilities">
+  <img class="caps-bg-img" src="brand_assets/Facility Photos/Capsule_dance.jpg"
+    alt="" aria-hidden="true" width="960" height="535" loading="lazy">
+  <div class="wrap">
+    <div class="caps-header reveal">
+      <div>
+        <p class="eyebrow">Capabilities</p>
+        <h2 class="section-h2">Built for every form factor.</h2>
+      </div>
+      <p class="section-intro">From formulation through fulfillment — our 75,000 sq ft facility handles the full production cycle with the speed, precision, and quality your brand demands. Every format. Every scale.</p>
+    </div>
+
+    <div class="caps-grid">
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Powder Manufacturing -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Powder+Manufacturing" alt="Powder manufacturing preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><ellipse cx="16" cy="22" rx="10" ry="4"/><path d="M6 22 Q6 10 16 10 Q26 10 26 22"/><line x1="16" y1="10" x2="16" y2="6"/><circle cx="16" cy="4.5" r="2"/></svg>
+        </div>
+        <h3 class="cap-name">Powder Manufacturing</h3>
+        <p class="cap-desc">Bulk and sachet powders for protein, greens, pre-workouts, and supplement stacks. Precision blending, custom flavoring, and fill-to-finish packaging under one roof.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Capsules -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Capsules" alt="Capsules preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><rect x="6" y="12" width="20" height="8" rx="4"/><line x1="16" y1="12" x2="16" y2="20"/></svg>
+        </div>
+        <h3 class="cap-name">Capsules</h3>
+        <p class="cap-desc">Hard gelatin and vegetarian capsules across a range of fill weights and formulations. Consistent weight tolerances and clean encapsulation across every batch.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Tablets -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Tablets" alt="Tablets preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="9"/><circle cx="16" cy="16" r="4"/><line x1="16" y1="7" x2="16" y2="9"/><line x1="16" y1="23" x2="16" y2="25"/><line x1="7" y1="16" x2="9" y2="16"/><line x1="23" y1="16" x2="25" y2="16"/></svg>
+        </div>
+        <h3 class="cap-name">Tablets</h3>
+        <p class="cap-desc">Film-coated, chewable, and extended-release tablet formats. High-speed compression with strict weight and hardness tolerances maintained batch after batch.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Stick Packs -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Stick+Packs" alt="Stick packs preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><rect x="9" y="5" width="14" height="22" rx="1"/><line x1="9" y1="13" x2="23" y2="13"/><line x1="9" y1="19" x2="23" y2="19"/></svg>
+        </div>
+        <h3 class="cap-name">Stick Packs</h3>
+        <p class="cap-desc">Single-serve stick packs for on-the-go convenience — electrolytes, collagen, and functional blends. Precision filling with print-ready packaging.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Bottling -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Bottling" alt="Bottling preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><path d="M12 7 Q9 7 9 11 L9 27 Q9 29 16 29 Q23 29 23 27 L23 11 Q23 7 20 7 Z"/><rect x="12" y="3" width="8" height="5" rx="1"/><line x1="13" y1="15" x2="19" y2="15"/></svg>
+        </div>
+        <h3 class="cap-name">Bottling</h3>
+        <p class="cap-desc">High-speed bottle filling for capsules, tablets, and powders. Automated counting, cotton insertion, induction sealing, and labeling — retail-ready.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Packaging & Fulfillment -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Packaging+%26+Fulfillment" alt="Packaging and fulfillment preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><polyline points="4,13 16,6 28,13 28,25 16,32 4,25"/><polyline points="4,13 16,20 28,13"/><line x1="16" y1="20" x2="16" y2="32"/></svg>
+        </div>
+        <h3 class="cap-name">Packaging &amp; Fulfillment</h3>
+        <p class="cap-desc">End-to-end packaging design, secondary packaging, kitting, and direct fulfillment. Your product, shelf-ready — shipped to your warehouse or direct to customers.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Custom Formulation -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Custom+Formulation" alt="Custom formulation preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><path d="M13 5 L11 16 L8 18 L8 27 L24 27 L24 18 L21 16 L19 5 Z"/><line x1="11" y1="16" x2="21" y2="16"/><line x1="13" y1="11" x2="19" y2="11"/></svg>
+        </div>
+        <h3 class="cap-name">Custom Formulation</h3>
+        <p class="cap-desc">In-house R&amp;D team develops proprietary blends and optimizes existing formulas for manufacturability, regulatory compliance, and efficacy.</p>
+      </div>
+
+      <div class="cap-card">
+        <!-- TODO: swap image — Quality Testing -->
+        <div class="cap-preview">
+          <img class="cap-preview-img" src="https://placehold.co/320x180/E6F0E1/4B7A3C?text=Quality+Testing" alt="Quality testing preview">
+        </div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><line x1="20" y1="20" x2="27" y2="27"/><path d="M11 14 l2 2 l4-4"/></svg>
+        </div>
+        <h3 class="cap-name">Quality Testing</h3>
+        <p class="cap-desc">Comprehensive in-house and third-party testing for potency, identity, microbial limits, and heavy metals. Every batch released against a strict COA.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ PROCESS ════════════════ -->
+<section id="process">
+  <div class="process-glow"></div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light reveal">How It Works</p>
+    <h2 class="process-h2 reveal d1">From concept to shelf<br><em style="font-style:italic;color:var(--mid);">in four clear steps.</em></h2>
+
+    <div class="process-progress-wrap reveal d1">
+      <div id="process-progress-fill"></div>
+      <div class="process-progress-dots" aria-hidden="true">
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
+      </div>
+    </div>
+
+    <div class="steps-grid reveal d2">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Concept &amp; Brief</h3>
+        <p class="step-desc">Tell us your product vision — format, target dose, market, and timeline. We review your brief and respond within 48 hours with a clear path forward. No jargon, no runaround.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Formulation</h3>
+        <p class="step-desc">Our R&amp;D team develops or refines your formula to exact specification — optimized for manufacturability, regulatory compliance, and the efficacy claims your brand needs to stand behind.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Manufacturing</h3>
+        <p class="step-desc">Full-scale production in our cGMP-certified, FDA-registered facility. Batch records, in-process quality checks, and COA-backed release — every time, without exception.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Delivery</h3>
+        <p class="step-desc">Finished product to your warehouse, retail partner, or fulfillment center. We handle secondary packaging, labeling, and compliance documentation end to end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ WHY KELKER ════════════════ -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-grid">
+
+      <div class="reveal">
+        <p class="eyebrow">Why Kelker</p>
+        <h2 class="why-h2">The direct-from-manufacturer advantage.</h2>
+        <p class="why-body">Most brands work through brokers, intermediaries, and outsourced QA. Kelker Pharma eliminates every layer between you and the people running the floor — faster answers, cleaner accountability, and a partner invested in your outcome, not just your purchase order.</p>
+        <a href="contact.html" class="btn btn--solid">Work With Us</a>
+        <div class="photo-accent photo-accent--why" style="margin-top:2rem;">
+          <img
+            src="brand_assets/Facility Photos/V-rex.jpg"
+            alt="V-Rex industrial blender inside the Kelker Pharma manufacturing facility"
+            width="960" height="720"
+            loading="lazy">
+        </div>
+      </div>
+
+      <div class="why-items reveal d1">
+        <div class="why-item">
+          <div class="why-n">01</div>
+          <div>
+            <div class="why-title">Pharmaceutical-Grade Rigor</div>
+            <div class="why-desc">Our facility operates to cGMP standards — the same regulatory framework governing prescription drug manufacturing. Your supplement deserves the same discipline.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-n">02</div>
+          <div>
+            <div class="why-title">Scalable Production</div>
+            <div class="why-desc">From development-run quantities to millions of units per month. Our 75,000 sq ft floor scales with your brand at every stage of growth.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-n">03</div>
+          <div>
+            <div class="why-title">End-to-End Accountability</div>
+            <div class="why-desc">We own every step — formulation, production, quality release, packaging, fulfillment. One partner, one point of contact, complete chain of custody.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-n">04</div>
+          <div>
+            <div class="why-title">Experienced Team</div>
+            <div class="why-desc">Our scientists, QA professionals, and production leads bring decades of combined pharmaceutical and nutraceutical experience. Your challenge is familiar territory.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-n">05</div>
+          <div>
+            <div class="why-title">Brand Support from Concept to Shelf</div>
+            <div class="why-desc">We partner on formulation, compliance, label claims, and go-to-market timelines. You keep the brand. We keep the line running.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CTA ════════════════ -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-grain"></div>
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <div>
+        <p class="cta-kicker">Start a Project</p>
+        <h2 class="cta-h2">Ready to bring your formula to market?</h2>
+        <p class="cta-sub">Tell us what you're building. We'll review your brief and come back within 48 hours with a formulation assessment, production feasibility, and a clear quote — no runaround, no guesswork.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn--white">Request a Quote</a>
+        <a href="contact.html" class="btn btn--ghost-white">Send Us Your Brief</a>
+        <p class="cta-note">Response within 48 business hours</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ CERTIFICATIONS ════════════════ -->
+<section id="certs">
+  <div class="wrap certs-eyebrow">
+    <p class="eyebrow eyebrow--light reveal" style="justify-content:center;margin-bottom:0;">Certifications &amp; Quality Marks</p>
+  </div>
+  <div class="marquee-viewport" aria-label="Certification logos carousel">
+    <!-- Track duplicated so the loop is seamless: items appear twice -->
+    <div class="marquee-track">
+      <!-- Set A -->
+      <div class="cert-item">
+        <img src="brand_assets/cert-cgmp.svg" alt="cGMP Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">cGMP Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-fda.svg" alt="FDA Registered" class="cert-logo" style="height:44px;">
+        <span class="cert-label">FDA Registered</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-usda-organic.svg" alt="USDA Organic" class="cert-logo" style="height:62px;">
+        <span class="cert-label">USDA Organic</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-nsf.svg" alt="NSF Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">NSF Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-kosher.svg" alt="OU Kosher" class="cert-logo" style="height:62px;">
+        <span class="cert-label">Kosher</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-halal.svg" alt="Halal Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">Halal Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-oregon-tilth.svg" alt="Oregon Tilth" class="cert-logo" style="height:44px;">
+        <span class="cert-label">Oregon Tilth</span>
+      </div>
+      <!-- Set B (duplicate for seamless loop) -->
+      <div class="cert-item">
+        <img src="brand_assets/cert-cgmp.svg" alt="cGMP Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">cGMP Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-fda.svg" alt="FDA Registered" class="cert-logo" style="height:44px;">
+        <span class="cert-label">FDA Registered</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-usda-organic.svg" alt="USDA Organic" class="cert-logo" style="height:62px;">
+        <span class="cert-label">USDA Organic</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-nsf.svg" alt="NSF Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">NSF Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-kosher.svg" alt="OU Kosher" class="cert-logo" style="height:62px;">
+        <span class="cert-label">Kosher</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-halal.svg" alt="Halal Certified" class="cert-logo" style="height:62px;">
+        <span class="cert-label">Halal Certified</span>
+      </div>
+      <div class="cert-item">
+        <img src="brand_assets/cert-oregon-tilth.svg" alt="Oregon Tilth" class="cert-logo" style="height:44px;">
+        <span class="cert-label">Oregon Tilth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer id="footer">
+  <div class="wrap">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="brand_assets/KPI Kelker Logo (no box).png" alt="Kelker Pharma">
+        <p class="footer-tagline">"Where Life Begins&reg;"</p>
+        <p class="footer-meta">Kelker Pharma, Inc. &mdash; Los Angeles, CA</p>
+      </div>
+      <div>
+        <span class="col-head">Capabilities</span>
+        <ul class="col-list">
+          <li><a href="#capabilities">Powder Manufacturing</a></li>
+          <li><a href="#capabilities">Capsules &amp; Tablets</a></li>
+          <li><a href="#capabilities">Stick Packs &amp; Bottling</a></li>
+          <li><a href="#capabilities">Custom Formulation</a></li>
+          <li><a href="#capabilities">Packaging &amp; Fulfillment</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="col-head">Company</span>
+        <ul class="col-list">
+          <li><a href="#about">About Kelker</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#why">Why Kelker</a></li>
+          <li><a href="#certs">Certifications</a></li>
+          <li><a href="contact.html">Start a Project</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="col-head">Contact</span>
+        <a href="mailto:info@kelkerpharma.com" class="footer-email">info@kelkerpharma.com</a>
+        <span class="footer-url">kelkerpharma.com</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Kelker Pharma, Inc. All rights reserved.</span>
+      <div class="cert-pills">
+        <span class="cert-pill">cGMP</span>
+        <span class="cert-pill">FDA Registered</span>
+        <span class="cert-pill">USDA Organic</span>
+        <span class="cert-pill">NSF</span>
+        <span class="cert-pill">Kosher</span>
+        <span class="cert-pill">Halal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ─── NAV SCROLL ─────────────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  /* ─── SCROLL REVEAL ──────────────────────────── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => revealIO.observe(el));
+
+  /* ─── BUBBLE-POP CAPABILITY CARD REVEALS ────── */
+  const capsGrid = document.querySelector('.caps-grid');
+  if (capsGrid) {
+    const capsCards = [...capsGrid.querySelectorAll('.cap-card')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reducedMotion) {
+      capsCards.forEach(c => {
+        c.style.opacity = '0';
+        c.style.transform = 'translateY(18px) scale(0.93)';
+      });
+    }
+    const capsIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          if (!reducedMotion) {
+            // Fisher-Yates shuffle → randomized stagger order
+            const indices = capsCards.map((_, i) => i);
+            for (let i = indices.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            const delayMap = new Array(capsCards.length);
+            indices.forEach((cardIdx, pos) => { delayMap[cardIdx] = pos * 120; });
+            capsCards.forEach((c, i) => {
+              setTimeout(() => {
+                c.style.transition = 'opacity 0.7s cubic-bezier(0.34,1.4,0.64,1), transform 0.7s cubic-bezier(0.34,1.4,0.64,1)';
+                c.style.opacity = '1';
+                c.style.transform = 'translateY(0) scale(1)';
+              }, delayMap[i]);
+            });
+          }
+          capsIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    capsIO.observe(capsGrid);
+  }
+
+  /* ─── CAPABILITY CARD PREVIEW — MOBILE TAP ───── */
+  if (window.matchMedia('(hover: none)').matches) {
+    const capCards = document.querySelectorAll('.cap-card');
+    capCards.forEach(card => {
+      card.addEventListener('click', e => {
+        const isActive = card.classList.contains('active');
+        capCards.forEach(c => c.classList.remove('active'));
+        if (!isActive) card.classList.add('active');
+        e.stopPropagation();
+      });
+    });
+    document.addEventListener('click', () => {
+      capCards.forEach(c => c.classList.remove('active'));
+    });
+  }
+
+  /* ─── COUNTER ANIMATION ──────────────────────── */
+  function countUp(el, target) {
+    const suffix = el.dataset.suffix || '';
+    const numSpan = el.querySelector('.count-num');
+    const suffixEl = el.querySelector('span:not(.count-num), em');
+    if (!numSpan) return;
+    const duration = 1800;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      numSpan.textContent = Math.round(ease * target);
+      if (t < 1) requestAnimationFrame(tick);
+      else numSpan.textContent = target;
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const counterEls = document.querySelectorAll('[data-count]');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        countUp(e.target, parseInt(e.target.dataset.count));
+        counterIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counterEls.forEach(el => counterIO.observe(el));
+
+  /* ─── HERO CURSOR LIGHT ──────────────────────── */
+  const hero = document.getElementById('hero');
+  const cursorLight = hero ? hero.querySelector('.hero-cursor-light') : null;
+  if (hero && cursorLight) {
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+      const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+      cursorLight.style.background = `radial-gradient(700px circle at ${x}% ${y}%, rgba(75,122,60,0.09) 0%, transparent 68%)`;
+    }, { passive: true });
+  }
+
+  /* ─── HERO PARTICLES ─────────────────────────── */
+  const particleWrap = document.getElementById('hero-particles');
+  if (particleWrap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const sz = 1.5 + Math.random() * 2.5;
+      const dur = 28 + Math.random() * 38;
+      const delay = Math.random() * dur;
+      const op = (0.07 + Math.random() * 0.16).toFixed(2);
+      const dx = ((Math.random() - 0.5) * 44).toFixed(1);
+      p.style.cssText = `width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;left:${(Math.random()*100).toFixed(1)}%;top:${(20+Math.random()*75).toFixed(1)}%;--p-op:${op};--p-dx:${dx}px;animation-duration:${dur.toFixed(1)}s;animation-delay:-${delay.toFixed(1)}s`;
+      particleWrap.appendChild(p);
+    }
+  }
+
+  /* ─── PROCESS PROGRESS BAR ───────────────────── */
+  const processSection = document.getElementById('process');
+  const progFill = document.getElementById('process-progress-fill');
+  const progDots = document.querySelectorAll('.process-dot');
+  if (processSection && progFill) {
+    const updateProgress = () => {
+      const r = processSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, (-r.top + vh * 0.6) / (r.height - vh * 0.3)));
+      progFill.style.width = (progress * 100) + '%';
+      progDots.forEach((d, i) => {
+        d.classList.toggle('lit', progress >= i / progDots.length);
+      });
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+</script>
+</body>
+</html>

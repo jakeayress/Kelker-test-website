@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Kelker Pharma, Inc.</title>
+  <meta name="description" content="Learn about Kelker Pharma — a California-based cGMP supplement contract manufacturer established in 2015, 30 minutes southeast of Los Angeles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --green:      #4B7A3C;
+      --dark:       #1C2E17;
+      --mid:        #7DAD5C;
+      --light:      #B2D09E;
+      --pale:       #E6F0E1;
+      --ghost:      #F4F8F2;
+      --warm-white: #FAFAF5;
+      --parchment:  #F2EEE6;
+      --charcoal:   #1A1A1A;
+      --stone:      #5A5A5A;
+      --silver:     #C0C0BC;
+      --divider:    #E2DDD8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+    @media (max-width: 700px) { .wrap { padding: 0 1.5rem; } }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--green); opacity: 0.22; }
+    .eyebrow--light { color: var(--mid); }
+    .eyebrow--light::after { background: var(--mid); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+      padding: 0.85rem 1.75rem; border: 1.5px solid transparent;
+      border-radius: 2px; cursor: pointer; transition: background 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+    }
+    .btn--solid { background: var(--green); color: #fff; border-color: var(--green); }
+    .btn--solid:hover { background: var(--dark); border-color: var(--dark); box-shadow: 0 6px 20px rgba(28,46,23,0.24); }
+    .btn--outline { background: transparent; color: var(--green); border-color: rgba(75,122,60,0.38); }
+    .btn--outline:hover { background: rgba(75,122,60,0.06); border-color: var(--green); }
+    .btn--ghost-white { background: transparent; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.35); }
+    .btn--ghost-white:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.7); color: #fff; }
+
+    /* ─── NAVIGATION ─────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: box-shadow 0.3s ease;
+    }
+    #nav.is-scrolled { box-shadow: 0 2px 28px rgba(0,0,0,0.35); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 2rem; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 62px; width: auto; filter: brightness(0) invert(1); display: block; transition: opacity 0.2s ease; }
+    .nav-logo:hover img { opacity: 0.72; }
+    .nav-links { display: flex; list-style: none; gap: 2.25rem; align-items: center; }
+    .nav-links a {
+      font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: rgba(255,255,255,0.65); position: relative; padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: var(--mid); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-links a:hover, .nav-links a.active { color: rgba(255,255,255,0.92); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta {
+      font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+      color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.6rem 1.4rem; border-radius: 2px; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; flex-shrink: 0;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.5); color: #fff; }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } }
+
+    /* ─── REVEAL ─────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.4s; }
+
+    /* ─── PAGE HERO ──────────────────────────────────────── */
+    .page-hero {
+      background: var(--dark);
+      padding: 10rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 85% 50%, rgba(75,122,60,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 15% 30%, rgba(28,46,23,0.5) 0%, transparent 55%);
+    }
+    .page-hero .wrap { position: relative; }
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: center;
+    }
+    .page-hero-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 4px;
+      display: block;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .page-hero-img { display: none; }
+    }
+    .page-hero-kicker {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 1.25rem;
+    }
+    .page-hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em;
+      color: #fff; margin-bottom: 1.25rem; max-width: 700px;
+    }
+    .page-hero-h1 em { font-style: italic; color: var(--light); }
+    .page-hero-sub {
+      font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.55);
+      max-width: 520px; line-height: 1.7;
+    }
+    .page-hero-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      margin-top: 2rem;
+      font-family: 'Space Mono', monospace; font-size: 0.5rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.5rem 1rem; border-radius: 100px;
+    }
+
+    /* ─── COMPANY STORY ──────────────────────────────────── */
+    #story {
+      padding: 7rem 0;
+      background: var(--warm-white);
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .story-left {}
+    .story-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--dark); letter-spacing: -0.02em;
+    }
+    .story-tagline em { font-style: italic; color: var(--green); }
+    .story-est {
+      margin-top: 2.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--silver);
+    }
+    .story-est strong { color: var(--green); }
+    .story-right {}
+    .story-body p {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+      color: var(--stone); margin-bottom: 1.5rem;
+    }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-rule {
+      width: 48px; height: 2px;
+      background: var(--green); margin-bottom: 2.5rem;
+    }
+    @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    /* ─── MISSION / VISION / VALUES ─────────────────────── */
+    #mvv {
+      background: var(--ghost);
+      padding: 6rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+    }
+    .mvv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+    .mvv-card {}
+    .mvv-icon {
+      width: 44px; height: 44px;
+      background: var(--pale); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .mvv-icon svg { width: 20px; height: 20px; stroke: var(--green); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .mvv-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; color: var(--dark);
+      margin-bottom: 0.75rem; letter-spacing: -0.01em;
+    }
+    .mvv-text { font-size: 0.95rem; font-weight: 300; color: var(--stone); line-height: 1.75; }
+    .mvv-values-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mvv-values-list li {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.95rem; font-weight: 300; color: var(--stone);
+    }
+    .mvv-values-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    @media (max-width: 768px) { .mvv-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ─── CEO FEATURE ────────────────────────────────────── */
+    #ceo {
+      padding: 8rem 0;
+      background: var(--warm-white);
+    }
+    .ceo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .ceo-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 4px;
+      display: block;
+      box-shadow: 0 16px 48px rgba(28,46,23,0.12), 0 4px 16px rgba(28,46,23,0.08);
+    }
+    .ceo-content {}
+    .ceo-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 0.75rem;
+    }
+    .ceo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--dark);
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 2rem;
+    }
+    .ceo-bio {
+      font-size: 0.97rem; font-weight: 300; color: var(--stone);
+      line-height: 1.8; margin-bottom: 2rem;
+    }
+    .ceo-quote {
+      border-left: 3px solid var(--green);
+      padding: 1.25rem 1.5rem;
+      background: var(--ghost);
+      margin-bottom: 2rem;
+    }
+    .ceo-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 400; font-style: italic;
+      color: var(--dark); line-height: 1.7;
+    }
+    .ceo-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-style: italic; color: var(--stone);
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 960px) { .ceo-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ─── LEADERSHIP ─────────────────────────────────────── */
+    #leadership {
+      background: var(--ghost);
+      padding: 7rem 0;
+      border-top: 1px solid var(--divider);
+    }
+    .section-header { text-align: center; margin-bottom: 4.5rem; }
+    .section-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; color: var(--dark);
+      letter-spacing: -0.02em; line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 0.97rem; font-weight: 300; color: var(--stone);
+      max-width: 520px; margin: 0.75rem auto 0; line-height: 1.7;
+    }
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--divider);
+    }
+    .leader-card {
+      background: var(--warm-white);
+      display: block;
+      padding: 2.75rem;
+      border-top: 3px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .leader-card:hover { background: #fff; border-top-color: var(--green); }
+    .leader-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 3px;
+      display: block;
+      margin-bottom: 1.5rem;
+      background: var(--pale);
+    }
+    .leader-info {}
+    .leader-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; color: var(--dark);
+      letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 0.25rem;
+    }
+    .leader-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 1rem;
+    }
+    .leader-bio {
+      font-size: 0.9rem; font-weight: 300; color: var(--stone); line-height: 1.75;
+    }
+    @media (max-width: 960px) { .leadership-grid { grid-template-columns: 1fr; } }
+
+    /* ─── TEAM ───────────────────────────────────────────── */
+    #team {
+      background: var(--warm-white);
+      padding: 7rem 0;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .team-card {
+      display: flex; flex-direction: column; align-items: flex-start;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--divider);
+    }
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 3px;
+      display: block;
+      margin-bottom: 1rem;
+      background: var(--pale);
+    }
+    .team-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; color: var(--dark);
+      letter-spacing: -0.01em; margin-bottom: 0.2rem;
+    }
+    .team-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.44rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--stone);
+    }
+    @media (max-width: 700px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ─── QUALITY STATS ──────────────────────────────────── */
+    #quality {
+      background: var(--dark);
+      padding: 6rem 0;
+      position: relative; overflow: hidden;
+    }
+    #quality::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 80% 50%, rgba(75,122,60,0.1) 0%, transparent 60%);
+      animation: glow-breathe 18s ease-in-out infinite;
+    }
+    @keyframes glow-breathe { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+    .quality-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.06);
+    }
+    .quality-item {
+      background: var(--dark);
+      padding: 2.25rem 2rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .quality-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; color: #fff;
+      letter-spacing: -0.02em; line-height: 1;
+    }
+    .quality-num em { color: var(--mid); font-style: normal; }
+    .quality-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+    .quality-desc {
+      font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.45);
+      line-height: 1.65; margin-top: 0.25rem;
+    }
+    @media (max-width: 900px) { .quality-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .quality-grid { grid-template-columns: 1fr; } }
+
+    /* ─── CERTIFICATIONS MARQUEE ─────────────────────────── */
+    #certs-about {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 0;
+      overflow: hidden;
+    }
+    .marquee-viewport {
+      overflow: hidden; position: relative;
+    }
+    .marquee-viewport::before,
+    .marquee-viewport::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+    }
+    .marquee-viewport::before { left: 0; background: linear-gradient(to right, var(--dark) 0%, transparent 100%); }
+    .marquee-viewport::after  { right: 0; background: linear-gradient(to left, var(--dark) 0%, transparent 100%); }
+    .marquee-track {
+      display: flex; align-items: center;
+      width: max-content;
+      animation: marquee-ltr 38s linear infinite;
+    }
+    .marquee-viewport:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
+    .cert-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.75rem; padding: 0 2.5rem;
+    }
+    .cert-item img { height: 56px; width: auto; display: block; }
+    .cert-item-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.42rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); white-space: nowrap;
+    }
+
+    /* ─── CTA ────────────────────────────────────────────── */
+    #about-cta {
+      background: var(--dark);
+      padding: 7rem 0;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #about-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(75,122,60,0.14) 0%, transparent 60%);
+      animation: glow-breathe 14s ease-in-out infinite;
+    }
+    .about-cta-inner { position: relative; }
+    .about-cta-h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300; color: #fff;
+      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .about-cta-h2 em { font-style: italic; color: var(--light); }
+    .about-cta-sub {
+      font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.5);
+      margin-bottom: 2.5rem; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .about-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #0E1A0B;
+      padding: 3.5rem 0 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem;
+    }
+    .footer-brand {}
+    .footer-logo {
+      height: 38px; width: auto;
+      filter: brightness(0) invert(1); opacity: 0.7;
+      display: block; margin-bottom: 1rem;
+    }
+    .footer-tagline {
+      font-size: 0.82rem; font-weight: 300;
+      color: rgba(255,255,255,0.3); max-width: 220px; line-height: 1.6;
+    }
+    .footer-links-col {}
+    .footer-col-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.46rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); margin-bottom: 1.25rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-links a {
+      font-size: 0.85rem; font-weight: 300;
+      color: rgba(255,255,255,0.45); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.22);
+    }
+    .footer-cert-pills { display: flex; gap: 0.65rem; flex-wrap: wrap; }
+    .cert-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.42rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════ NAVIGATION ════════════ -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="index.html" class="nav-logo" aria-label="Kelker Pharma — Home">
+        <img src="brand_assets/KPI Kelker Logo (no box).png" alt="Kelker Pharma">
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html#capabilities">Capabilities</a></li>
+        <li><a href="index.html#process">Process</a></li>
+        <li><a href="index.html#why">Why Kelker</a></li>
+        <li><a href="index.html#certs">Certifications</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════ PAGE HERO ════════════ -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="page-hero-inner">
+      <div>
+        <p class="page-hero-kicker reveal">Kelker Pharma, Inc. — Established 2015</p>
+        <h1 class="page-hero-h1 reveal d1">Built on Precision.<br><em>Driven by Purpose.</em></h1>
+        <p class="page-hero-sub reveal d2">A California corporation dedicated to producing pharmaceutical-grade dietary supplements — with the speed, compliance, and customer service your brand deserves.</p>
+        <div class="page-hero-badge reveal d3">
+          <span>cGMP Certified</span>
+          <span style="opacity:0.3">·</span>
+          <span>FDA Registered</span>
+          <span style="opacity:0.3">·</span>
+          <span>Los Angeles, CA</span>
+          <span style="opacity:0.3">·</span>
+          <span>75,000 Sq Ft</span>
+        </div>
+      </div>
+      <img src="brand_assets/Facility Photos/Building-Outside.png" alt="Kelker Pharma facility in Riverside, California" class="page-hero-img reveal d2">
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ COMPANY STORY ════════════ -->
+<section id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-left reveal">
+        <p class="eyebrow">About Kelker Pharma</p>
+        <h2 class="story-tagline">Where Life<br>Begins<sup style="font-size:0.5em;vertical-align:super;color:var(--green)">®</sup></h2>
+        <p class="story-est" style="margin-top:2rem;">Founded <strong>2015</strong> · Riverside, CA · California Corporation</p>
+      </div>
+      <div class="story-right reveal d2">
+        <div class="story-rule"></div>
+        <div class="story-body">
+          <p>Kelker Pharma, Inc. is a California Corporation located just 30 minutes Southeast of Los Angeles. We operate state-of-the-art, high-speed automated machinery to produce tablets, capsules, and powders of uncompromised quality — built for brands that refuse to settle.</p>
+          <p>Our cGMP-certified facility houses nearly 75,000 square feet of manufacturing and warehouse space. Our streamlined operation provides the company with efficiencies that shorten production time without sacrificing quality. Our goal is to provide our customers with the best quality products in a timely manner, while also providing world-class customer service.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ MISSION / VISION / VALUES ════════════ -->
+<section id="mvv">
+  <div class="wrap">
+    <div class="mvv-grid">
+      <div class="mvv-card reveal">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 class="mvv-heading">Mission</h3>
+        <p class="mvv-text">To produce quality products that improve quality of life through better health.</p>
+      </div>
+      <div class="mvv-card reveal d2">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="mvv-heading">Vision</h3>
+        <p class="mvv-text">Continually advance our research and capabilities and apply them to consumer goods we produce — setting the industry standard for innovation and compliance.</p>
+      </div>
+      <div class="mvv-card reveal d3">
+        <div class="mvv-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3 class="mvv-heading">Values</h3>
+        <ul class="mvv-values-list">
+          <li>Trustworthy</li>
+          <li>Reliable</li>
+          <li>Accountable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CEO FEATURE ════════════ -->
+<section id="ceo">
+  <div class="wrap">
+    <div class="ceo-grid">
+      <img src="brand_assets/Updated People/Jim.jpg" alt="Jim Ayres, Chief Executive Officer" class="ceo-photo reveal">
+      <div class="ceo-content reveal d1">
+        <p class="ceo-title">Chief Executive Officer</p>
+        <h2 class="ceo-name">Jim Ayres</h2>
+        <div class="ceo-quote">
+          <p>"As a contract manufacturer of ingestible products, we all value the level of trust that our customers have in us to support their businesses by producing quality products with outstanding customer service. At Kelker Pharma, you can count on us for responsiveness and products of the highest quality standards."</p>
+        </div>
+        <p class="ceo-bio">Jim has over 20 years of experience in the health and wellness industry, including several successful consumer product launches in the mass and specialty retail channels of distribution as well as direct response channels. He has extensive experience in product ideation, applied science, and marketing.</p>
+        <p class="ceo-bio">Jim has founded several successful companies and developed nutritional products that have grossed over $100 Million worldwide. Past positions include Executive Vice President of Nova Pharmaceuticals, Inc., VP and Chairman of Gold's Gym Nutrition, VP of Business Development for a global natural product company, and founder and CEO of Innovative Nutrition.</p>
+        <p class="ceo-sig">Jim Ayres</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ LEADERSHIP ════════════ -->
+<section id="leadership">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <p class="eyebrow" style="justify-content:center;max-width:200px;margin:0 auto 1rem;">Leadership</p>
+      <h2 class="section-h2">The people behind<br>the product.</h2>
+      <p class="section-sub">Our leadership team brings decades of combined experience in pharmaceutical manufacturing, quality assurance, and supplement industry operations.</p>
+    </div>
+    <div class="leadership-grid">
+
+      <div class="leader-card reveal">
+        <img src="brand_assets/Updated People/Tariq.png" alt="Tariq Kelker, M.D." class="leader-photo">
+        <div class="leader-info">
+          <h3 class="leader-name">Tariq Kelker, M.D.</h3>
+          <p class="leader-title">Founder &amp; Chairman</p>
+          <p class="leader-bio">Dr. Kelker is the Co-founder, President, and Chairman of Kelker Pharma, Inc. While he is an important part of the day-to-day operations, Tariq is also helping patients as a trauma surgeon in three hospitals. He is a formulation specialist and develops many unique formulas and compounds for Kelker Pharma.</p>
+        </div>
+      </div>
+
+      <div class="leader-card reveal d2">
+        <img src="brand_assets/Updated People/Sadia.jpg" alt="Sadia Ahmed" class="leader-photo">
+        <div class="leader-info">
+          <h3 class="leader-name">Sadia Ahmed</h3>
+          <p class="leader-title">Executive Vice President (EVP) &amp; Chief Operating Officer (COO)</p>
+          <p class="leader-bio">With nearly 20 years of experience in the dietary supplement industry, Sadia brings her expertise to increase production output and serves as lead liaison to most of Kelker Pharma's premier customers. Sadia has built a top-standard industry reputation through her hard work and dedication to her customers.</p>
+        </div>
+      </div>
+
+      <div class="leader-card reveal">
+        <img src="brand_assets/Updated People/Armando.jpg" alt="Armando Alvarez" class="leader-photo">
+        <div class="leader-info">
+          <h3 class="leader-name">Armando Alvarez</h3>
+          <p class="leader-title">Vice President of Production</p>
+          <p class="leader-bio">Armando is a key member of the Kelker Pharma team, bringing years of experience in manufacturing operations. He is highly knowledgeable in manufacturing technologies and engineering, and has held virtually every position in manufacturing — applying that experience directly to Kelker Pharma's operations.</p>
+        </div>
+      </div>
+
+      <div class="leader-card reveal d2">
+        <img src="brand_assets/Updated People/Teresa.png" alt="Teresa Paniagua" class="leader-photo">
+        <div class="leader-info">
+          <h3 class="leader-name">Teresa Paniagua</h3>
+          <p class="leader-title">VP of Quality &amp; Regulatory Affairs</p>
+          <p class="leader-bio">Teresa leads Kelker Pharma's regulatory affairs function, ensuring every product and process meets the stringent compliance standards required by cGMP guidelines and FDA regulations. Her work is foundational to the trust Kelker Pharma's customers place in us.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TEAM ════════════ -->
+<section id="team">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <p class="eyebrow" style="justify-content:center;max-width:200px;margin:0 auto 1rem;">The Kelker Team</p>
+      <h2 class="section-h2">Dedicated professionals,<br>every step of the way.</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <img src="brand_assets/Updated People/Samantha.jpg" alt="Samantha Novelo" class="team-photo">
+        <p class="team-name">Samantha Novelo</p>
+        <p class="team-role">Client Services Representative</p>
+      </div>
+      <div class="team-card reveal d1">
+        <img src="brand_assets/Updated People/Fabiola.jpg" alt="Fabiola Gonzales" class="team-photo">
+        <p class="team-name">Fabiola Gonzales</p>
+        <p class="team-role">Director of Operations</p>
+      </div>
+      <div class="team-card reveal d2">
+        <img src="brand_assets/Updated People/Shabana.jpg" alt="Shabana Wahid" class="team-photo">
+        <p class="team-name">Shabana Wahid</p>
+        <p class="team-role">Director of Business Development &amp; Client Services</p>
+      </div>
+      <div class="team-card reveal">
+        <img src="brand_assets/Updated People/Krystal.png" alt="Krystal Orozco" class="team-photo">
+        <p class="team-name">Krystal Orozco</p>
+        <p class="team-role">Inventory Manager</p>
+      </div>
+      <div class="team-card reveal d1">
+        <img src="brand_assets/Updated People/Jade.jpg" alt="Jade Pearson" class="team-photo">
+        <p class="team-name">Jade Pearson</p>
+        <p class="team-role">Vice President of Procurement &amp; Planning</p>
+      </div>
+      <div class="team-card reveal d2">
+        <img src="brand_assets/Updated People/Jackie.jpg" alt="Jackie Valdez" class="team-photo">
+        <p class="team-name">Jackie Valdez</p>
+        <p class="team-role">Accounting Manager</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ QUALITY STATS ════════════ -->
+<section id="quality">
+  <div class="wrap">
+    <div class="section-header reveal" style="margin-bottom:3.5rem;">
+      <p class="eyebrow eyebrow--light" style="justify-content:center;max-width:200px;margin:0 auto 1rem;">Manufacturing &amp; Quality</p>
+      <h2 class="section-h2" style="color:#fff;">The numbers behind<br>our commitment.</h2>
+    </div>
+    <div class="quality-grid">
+      <div class="quality-item reveal">
+        <div class="quality-num">75<em>K</em></div>
+        <div class="quality-lbl">Sq Ft Facility</div>
+        <div class="quality-desc">Manufacturing and warehouse space under one roof in Riverside, CA.</div>
+      </div>
+      <div class="quality-item reveal d1">
+        <div class="quality-num">M<em>+</em></div>
+        <div class="quality-lbl">Units / Week</div>
+        <div class="quality-desc">High-speed automated lines producing millions of units weekly.</div>
+      </div>
+      <div class="quality-item reveal d2">
+        <div class="quality-num">7<em>+</em></div>
+        <div class="quality-lbl">Certifications</div>
+        <div class="quality-desc">cGMP, FDA, USDA Organic, NSF, Kosher, Halal, Oregon Tilth.</div>
+      </div>
+      <div class="quality-item reveal">
+        <div class="quality-num">48<em>hrs</em></div>
+        <div class="quality-lbl">Quote Turnaround</div>
+        <div class="quality-desc">From brief to quote in 48 hours — no jargon, no runaround.</div>
+      </div>
+      <div class="quality-item reveal d1">
+        <div class="quality-num">3<em>+</em></div>
+        <div class="quality-lbl">Dosage Forms</div>
+        <div class="quality-desc">Tablets, capsules, powders — every format, every scale.</div>
+      </div>
+      <div class="quality-item reveal d2">
+        <div class="quality-num">Est.<em> 2015</em></div>
+        <div class="quality-lbl">California Corporation</div>
+        <div class="quality-desc">A decade of precision manufacturing near Los Angeles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CERTIFICATIONS MARQUEE ════════════ -->
+<section id="certs-about">
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <div class="cert-item"><img src="brand_assets/cert-cgmp.svg" alt="cGMP"><span class="cert-item-name">cGMP</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-fda.svg" alt="FDA Registered"><span class="cert-item-name">FDA Registered</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-usda-organic.svg" alt="USDA Organic"><span class="cert-item-name">USDA Organic</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-nsf.svg" alt="NSF"><span class="cert-item-name">NSF</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-kosher.svg" alt="Kosher"><span class="cert-item-name">Kosher</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-halal.svg" alt="Halal"><span class="cert-item-name">Halal</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-oregon-tilth.svg" alt="Oregon Tilth"><span class="cert-item-name">Oregon Tilth</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="cert-item"><img src="brand_assets/cert-cgmp.svg" alt="cGMP"><span class="cert-item-name">cGMP</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-fda.svg" alt="FDA Registered"><span class="cert-item-name">FDA Registered</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-usda-organic.svg" alt="USDA Organic"><span class="cert-item-name">USDA Organic</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-nsf.svg" alt="NSF"><span class="cert-item-name">NSF</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-kosher.svg" alt="Kosher"><span class="cert-item-name">Kosher</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-halal.svg" alt="Halal"><span class="cert-item-name">Halal</span></div>
+      <div class="cert-item"><img src="brand_assets/cert-oregon-tilth.svg" alt="Oregon Tilth"><span class="cert-item-name">Oregon Tilth</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA ════════════ -->
+<section id="about-cta">
+  <div class="wrap">
+    <div class="about-cta-inner reveal">
+      <p class="eyebrow eyebrow--light" style="justify-content:center;max-width:200px;margin:0 auto 1rem;">Ready to Partner?</p>
+      <h2 class="about-cta-h2">Let's build something<br><em>great together.</em></h2>
+      <p class="about-cta-sub">Tell us about your product — we'll respond with a clear path forward within 48 hours.</p>
+      <div class="about-cta-btns">
+        <a href="contact.html" class="btn btn--solid">Start a Project</a>
+        <a href="contact.html" class="btn btn--ghost-white">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <img src="brand_assets/KPI Kelker Logo (no box).png" alt="Kelker Pharma" class="footer-logo">
+        <p class="footer-tagline">Pharmaceutical-grade supplement manufacturing near Los Angeles, CA.</p>
+      </div>
+      <div class="footer-links-col">
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
+          <li><a href="index.html#process">Our Process</a></li>
+          <li><a href="index.html#why">Why Kelker</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <p class="footer-col-label">Contact</p>
+        <ul class="footer-links">
+          <li><a href="contact.html">Start a Project</a></li>
+          <li><a href="tel:5625947621">(562) 594-7621</a></li>
+          <li><a href="mailto:info@kelkerpharma.com">info@kelkerpharma.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2025 Kelker Pharma, Inc. All rights reserved.</p>
+      <div class="footer-cert-pills">
+        <span class="cert-pill">cGMP</span>
+        <span class="cert-pill">FDA Registered</span>
+        <span class="cert-pill">USDA Organic</span>
+        <span class="cert-pill">NSF</span>
+        <span class="cert-pill">Kosher</span>
+        <span class="cert-pill">Halal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('is-scrolled', window.scrollY > 20), { passive: true });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
