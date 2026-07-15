@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPI Kelker — Email Signature</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #4B7A3C;
+      --forest: #1C2E17;
+      --leaf: #7DAD5C;
+      --sage: #B2D09E;
+      --mist: #E6F0E1;
+      --warm: #FAFAF5;
+      --parchment: #F2EEE6;
+    }
+    body { background: var(--warm); font-family: 'Jost', sans-serif; color: #1A1A1A; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--forest);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-header img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+    .header-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid rgba(178,208,158,.35);
+      border-radius: 100px;
+      padding: 5px 14px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--forest);
+      padding: 60px 48px 72px;
+      border-bottom: 1px solid rgba(75,122,60,.3);
+    }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--sage);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── MAIN ── */
+    .main { max-width: 900px; margin: 0 auto; padding: 72px 48px; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--sage); opacity: .5; }
+
+    /* ── EMAIL CHROME ── */
+    .email-chrome {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(28,46,23,.08), 0 1px 4px rgba(28,46,23,.05);
+      margin-bottom: 16px;
+    }
+    .email-chrome-bar {
+      background: #f5f5f5;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .email-meta {
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid #eee;
+    }
+    .email-meta-row { font-size: 12px; color: #888; margin-bottom: 4px; }
+    .email-meta-row strong { color: #333; font-weight: 500; }
+    .email-subject { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-top: 10px; }
+    .email-body {
+      padding: 24px 28px 32px;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+    .email-body p { margin-bottom: 14px; }
+    .email-body .sig-divider { border: none; border-top: 1px solid #e8e8e8; margin: 20px 0; }
+
+    /* ── COPY BUTTON ── */
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .03em;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background .15s ease, transform .1s ease;
+    }
+    .copy-btn:hover { background: var(--forest); }
+    .copy-btn:active { transform: scale(.98); }
+    .copy-btn.copied { background: #2a6e1e; }
+
+    /* ── CODE BLOCK ── */
+    .code-section { margin-top: 56px; }
+    .code-wrap {
+      background: var(--forest);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .code-header span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--sage);
+      letter-spacing: .06em;
+    }
+    .code-copy-btn {
+      background: rgba(75,122,60,.3);
+      border: 1px solid rgba(75,122,60,.5);
+      color: var(--sage);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .06em;
+      border-radius: 4px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .code-copy-btn:hover { background: rgba(75,122,60,.5); }
+    .code-copy-btn.copied { color: #7DAD5C; }
+    pre {
+      padding: 20px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #b8cfb0;
+      overflow-x: auto;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* ── VARIANTS ── */
+    .variant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+    .variant-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--forest);
+      letter-spacing: .03em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .variant-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--mist);
+      color: var(--green);
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    /* ── PLACEHOLDER GUIDE ── */
+    .placeholder-guide {
+      background: var(--mist);
+      border-left: 3px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-top: 48px;
+    }
+    .placeholder-guide h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: 16px;
+    }
+    .placeholder-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .ph-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      background: rgba(75,122,60,.08);
+      padding: 2px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+      min-width: 160px;
+    }
+    .ph-desc { color: #555; font-weight: 300; }
+
+    /* ── INSTALL GUIDE ── */
+    .install-section { margin-top: 64px; }
+    .install-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+    .install-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .install-card-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--forest);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .install-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--mist);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .install-steps {
+      list-style: none;
+      counter-reset: step;
+    }
+    .install-steps li {
+      counter-increment: step;
+      font-size: 12px;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 8px;
+      padding-left: 22px;
+      position: relative;
+    }
+    .install-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 16px;
+      height: 16px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--forest);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 80px;
+    }
+    .site-footer img { height: 32px; filter: brightness(0) invert(1); opacity: .6; }
+    .site-footer span {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(178,208,158,.5);
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 700px) {
+      .variant-grid { grid-template-columns: 1fr; }
+      .install-grid { grid-template-columns: 1fr; }
+      .main { padding: 48px 24px; }
+      .site-header { padding: 16px 24px; }
+      .hero { padding: 48px 24px 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <img src="brand_assets/KPI Kelker Logo (no box).png" alt="KPI Kelker">
+  <span class="header-badge">Brand Asset</span>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-eyebrow">Handoff Kit</p>
+  <h1>Email Signature</h1>
+  <p>Two variants — Standard and Compact — ready to paste into Gmail, Outlook, or Apple Mail. Replace the bracketed placeholders with each team member's details.</p>
+</section>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- STANDARD VARIANT -->
+  <p class="section-label">Standard Signature</p>
+
+  <div class="email-chrome">
+    <div class="email-chrome-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <div class="email-meta">
+      <div class="email-meta-row"><strong>From:</strong> Jane Smith &lt;jane.smith@kelkerpharma.com&gt;</div>
+      <div class="email-meta-row"><strong>To:</strong> client@example.com</div>
+      <div class="email-subject">Following up on your formulation inquiry</div>
+    </div>
+    <div class="email-body">
+      <p>Hi Sarah,</p>
+      <p>Thanks for reaching out — happy to walk you through our capsule capabilities. I'll have a quote over to you within 48 hours.</p>
+      <p>Best,</p>
+      <hr class="sig-divider">
+      <!-- STANDARD SIGNATURE PREVIEW -->
+      <div id="sig-standard-preview"></div>
+    </div>
+  </div>
+
+  <button class="copy-btn" id="copy-standard">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    Copy HTML
+  </button>
+
+  <!-- COMPACT VARIANT -->
+  <div style="margin-top: 64px;">
+    <p class="section-label">Compact Signature</p>
+
+    <div class="email-chrome">
+      <div class="email-chrome-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="email-meta">
+        <div class="email-meta-row"><strong>From:</strong> Marcus Lee &lt;marcus.lee@kelkerpharma.com&gt;</div>
+        <div class="email-meta-row"><strong>To:</strong> supplier@example.com</div>
+        <div class="email-subject">Re: Q3 ingredient order</div>
+      </div>
+      <div class="email-body">
+        <p>Confirmed — order approved. I'll loop in procurement.</p>
+        <p>Thanks,</p>
+        <hr class="sig-divider">
+        <div id="sig-compact-preview"></div>
+      </div>
+    </div>
+
+    <button class="copy-btn" id="copy-compact">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy HTML
+    </button>
+  </div>
+
+  <!-- PLACEHOLDER GUIDE -->
+  <div class="placeholder-guide">
+    <h3>Customize Your Signature</h3>
+    <div class="placeholder-row">
+      <span class="ph-key">[FIRST LAST]</span>
+      <span class="ph-desc">Full name, e.g. <em>Jane Smith</em></span>
+    </div>
+    <div class="placeholder-row">
+      <span class="ph-key">[TITLE]</span>
+      <span class="ph-desc">Job title, e.g. <em>Director of Operations</em></span>
+    </div>
+    <div class="placeholder-row">
+      <span class="ph-key">[PHONE]</span>
+      <span class="ph-desc">Direct line, e.g. <em>(562) 594-7621</em></span>
+    </div>
+    <div class="placeholder-row">
+      <span class="ph-key">[EMAIL]</span>
+      <span class="ph-desc">Work email, e.g. <em>jane.smith@kelkerpharma.com</em></span>
+    </div>
+  </div>
+
+  <!-- INSTALL GUIDE -->
+  <div class="install-section">
+    <p class="section-label">How to Install</p>
+    <div class="install-grid">
+      <div class="install-card">
+        <div class="install-card-title">
+          <div class="install-icon">✉</div>
+          Gmail
+        </div>
+        <ol class="install-steps">
+          <li>Click the gear icon → <em>See all settings</em></li>
+          <li>Go to the <em>General</em> tab</li>
+          <li>Scroll to <em>Signature</em> → create or edit</li>
+          <li>Click the <em>source</em> icon (&lt;&gt;) in the toolbar</li>
+          <li>Paste the copied HTML, click OK</li>
+          <li>Save Changes at the bottom</li>
+        </ol>
+      </div>
+      <div class="install-card">
+        <div class="install-card-title">
+          <div class="install-icon">📧</div>
+          Outlook
+        </div>
+        <ol class="install-steps">
+          <li>Go to <em>File → Options → Mail → Signatures</em></li>
+          <li>Click <em>New</em>, name your signature</li>
+          <li>In the editor, click the HTML icon or open in browser</li>
+          <li>Paste the HTML directly into a new email in compose view</li>
+          <li>Copy the rendered result back into the signature editor</li>
+          <li>Click OK to save</li>
+        </ol>
+      </div>
+      <div class="install-card">
+        <div class="install-card-title">
+          <div class="install-icon">🍎</div>
+          Apple Mail
+        </div>
+        <ol class="install-steps">
+          <li>Go to <em>Mail → Preferences → Signatures</em></li>
+          <li>Create a new signature and type placeholder text</li>
+          <li>Quit Mail, then open the signature file in <em>~/Library/Mail/V10/MailData/Signatures/</em></li>
+          <li>Replace the file contents with the copied HTML</li>
+          <li>Reopen Mail — your signature is ready</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAW CODE -->
+  <div class="code-section">
+    <p class="section-label">Raw HTML — Standard</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span>signature-standard.html</span>
+        <button class="code-copy-btn" id="code-copy-standard">copy</button>
+      </div>
+      <pre id="code-standard"></pre>
+    </div>
+
+    <p class="section-label" style="margin-top:40px;">Raw HTML — Compact</p>
+    <div class="code-wrap">
+      <div class="code-header">
+        <span>signature-compact.html</span>
+        <button class="code-copy-btn" id="code-copy-compact">copy</button>
+      </div>
+      <pre id="code-compact"></pre>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <img src="brand_assets/KPI Kelker Logo (no box).png" alt="KPI Kelker">
+  <span>KPI Kelker Brand Assets &nbsp;·&nbsp; Internal Use Only</span>
+</footer>
+
+<script>
+const LOGO_B64 = 'iVBORw0KGgoAAAANSUhEUgAAAcEAAAHzCAYAAABYCaZOAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAAFKAAAAAQAAAUoAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAcGgAwAEAAAAAQAAAfMAAAAATfm3eQAAAAlwSFlzAAAywAAAMsABKGRa2wAAQABJREFUeAHt3QmAHUWd+PGqfnPnhATliBiWLNdAIHkzKKxg3GUjARMyBx6AugiiKKj4B5Er0zOEG8H1FsFjZRXMHCEcEUWILmzYzUwSjiBoFHADohAI5Jzjdf1/PTnIZN7Mu7rf6+P7dJj3uqurqz7Vk9+r7upqpXghgAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAELiEBBIHdCfACRMCgAAAABJRU5ErkJggg==';
+
+// ── STANDARD SIGNATURE HTML ──
+function buildStandard(preview = false) {
+  const logoSrc = preview ? 'brand_assets/KPI Kelker Logo (no box).png' : `data:image/png;base64,${LOGO_B64}`;
+  return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;max-width:520px;">
+  <tr>
+    <td style="padding:0 22px 0 0;vertical-align:middle;">
+      <img src="${logoSrc}" width="72" height="80" alt="KPI Kelker Pharma" style="display:block;">
+    </td>
+    <td style="border-left:3px solid #4B7A3C;padding:0 0 0 22px;vertical-align:top;">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="padding:0 0 3px;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:700;color:#1C2E17;letter-spacing:-0.2px;white-space:nowrap;">[FIRST LAST]</td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 12px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#4B7A3C;letter-spacing:.1em;text-transform:uppercase;">[TITLE]</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 0 8px;border-top:1px solid #B2D09E;">
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#333;">[PHONE]</span>
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#B2D09E;margin:0 8px;">&#183;</span>
+            <a href="mailto:[EMAIL]" style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#4B7A3C;text-decoration:none;">[EMAIL]</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 0 10px;">
+            <a href="https://kelkerpharma.com" style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#888;text-decoration:none;">kelkerpharma.com</a>
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#B2D09E;margin:0 8px;">&#183;</span>
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#aaa;">4975 Arlington Ave, Riverside CA 92503</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:10px;color:#7DAD5C;letter-spacing:.02em;">We Market, You Make It.</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>`;
+}
+
+// ── COMPACT SIGNATURE HTML ──
+function buildCompact(preview = false) {
+  const logoSrc = preview ? 'brand_assets/KPI Kelker Logo (no box).png' : `data:image/png;base64,${LOGO_B64}`;
+  return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+  <tr>
+    <td style="padding:0 18px 0 0;vertical-align:middle;">
+      <img src="${logoSrc}" width="54" height="60" alt="KPI Kelker Pharma" style="display:block;">
+    </td>
+    <td style="border-left:2px solid #4B7A3C;padding:0 0 0 18px;vertical-align:middle;">
+      <p style="margin:0 0 2px;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;color:#1C2E17;">[FIRST LAST]</p>
+      <p style="margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#4B7A3C;letter-spacing:.08em;text-transform:uppercase;">[TITLE]</p>
+      <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;">
+        <span style="color:#333;">[PHONE]</span>
+        <span style="color:#B2D09E;margin:0 7px;">&#183;</span>
+        <a href="mailto:[EMAIL]" style="color:#4B7A3C;text-decoration:none;">[EMAIL]</a>
+        <span style="color:#B2D09E;margin:0 7px;">&#183;</span>
+        <a href="https://kelkerpharma.com" style="color:#888;text-decoration:none;">kelkerpharma.com</a>
+      </p>
+    </td>
+  </tr>
+</table>`;
+}
+
+// ── PREVIEW ──
+document.getElementById('sig-standard-preview').innerHTML = buildStandard(true);
+document.getElementById('sig-compact-preview').innerHTML = buildCompact(true);
+
+// ── CODE BLOCKS ──
+const codeStandard = buildStandard(false);
+const codeCompact  = buildCompact(false);
+document.getElementById('code-standard').textContent = codeStandard;
+document.getElementById('code-compact').textContent  = codeCompact;
+
+// ── COPY BUTTONS ──
+function setupCopy(btnId, html, label) {
+  document.getElementById(btnId).addEventListener('click', () => {
+    navigator.clipboard.writeText(html).then(() => {
+      const btn = document.getElementById(btnId);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    });
+  });
+}
+
+setupCopy('copy-standard', codeStandard);
+setupCopy('copy-compact',  codeCompact);
+setupCopy('code-copy-standard', codeStandard);
+setupCopy('code-copy-compact',  codeCompact);
+</script>
+</body>
+</html>
