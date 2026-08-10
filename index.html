@@ -277,7 +277,7 @@
     }
 
     /* LEFT COLUMN */
-    .hero-text { padding: 4rem 0; }
+    .hero-text { padding: 2.5rem 0; }
 
     .hero-kicker {
       font-family: 'Space Mono', monospace;
@@ -292,7 +292,7 @@
 
     .hero-h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5vw, 5.4rem);
+      font-size: clamp(2.6rem, 4.2vw, 4.4rem);
       font-weight: 300;
       line-height: 1.0;
       letter-spacing: -0.025em;
@@ -953,8 +953,11 @@
       align-items: center;
       gap: 0;
       width: max-content;
+      will-change: transform;
       animation: marquee-ltr 38s linear infinite;
     }
+    /* Prevent layout-shift jump on image load */
+    .cert-item { flex-shrink: 0; }
 
     /* Pause on hover */
     .marquee-viewport:hover .marquee-track {
@@ -962,8 +965,8 @@
     }
 
     @keyframes marquee-ltr {
-      from { transform: translateX(-50%); }
-      to   { transform: translateX(0%); }
+      from { transform: translateX(0%); }
+      to   { transform: translateX(-50%); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1132,7 +1135,32 @@
       .footer-main { grid-template-columns: 1fr; }
       .hero-proof-row { gap: 1.5rem; flex-wrap: wrap; }
     }
-    /* ─── INTRO OVERLAY ─────────────────────────────────── */
+    /* ─── FALLING LEAF ──────────────────────────────────── */
+    .about-kpi-logo-wrap { margin-bottom: 2rem; }
+    .about-kpi-svg {
+      display: block;
+      height: 120px;
+      width: auto;
+      opacity: 1;
+    }
+    #kpi-falling-leaf {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 50; /* above page content, below nav (200) */
+      pointer-events: none;
+      width: 42px;
+      height: 33px;
+      opacity: 0;
+      will-change: transform, opacity;
+      transform-origin: 23px 9px; /* pivot at vine tip */
+      filter:
+        drop-shadow(0 0 7px rgba(255,255,255,0.55))
+        drop-shadow(0 3px 9px rgba(75,122,60,0.30));
+    }
+    @media (max-width: 900px), (prefers-reduced-motion: reduce), (hover: none) {
+      #kpi-falling-leaf { display: none; }
+      .about-kpi-logo-wrap { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1272,6 +1300,13 @@
     <div class="about-grid">
 
       <div class="reveal">
+        <div class="about-kpi-logo-wrap" id="leaf-origin">
+          <svg class="about-kpi-svg" viewBox="0 0 1202.69 1313.79" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4B7A3C" d="M632.16,650.86c116.65,54.81,120.42,239.57,90.25,345.79-10.65,37.49-29.65,72.59-58.99,98.24-50.71,44.33-125.18,56.07-187.5,30.68-28.13-11.46-47.89-32.57-72.79-50.97l-1.22,232.11c-31.31,9.2-56.76,10.14-85.53-1.46l-.45-295.17c-9.17-1.98-29.22-4.1-35.06-11.7l-193.23-251.32-1.86,254.74c-29.64,10.08-58.41,11.23-85.79-1.64V305.81c27.83-12.82,55.18-11.8,86.18-1.22l.31,418.08,179.61-196.75c26.68-11.49,59.15-7.69,88.19-3.33,5.18,12.38,3.61,21.97-2.31,32.99l-170.92,170.85,134.68,176.14.68-253.07c23.86-11.89,49.45-10.23,74.53-1.89l2.79,64.82,36.66-31.2c55.83-47.51,133.82-62.28,201.74-30.37ZM569.46,1055.95c88.66-38.12,91.96-198.62,56.87-284.93-22.81-56.11-82.84-77.32-136.22-50.41-33.75,17.01-65.64,47.25-87.1,78.77l-.37,177.13c42.03,52.18,99.96,108.17,166.83,79.43Z"/>
+            <path fill="#4B7A3C" class="kpi-logo-leaf" id="logo-leaf-path" d="M626.17,548.52c19.36-101.52,222.67-263.27,304.57-324.37,7.03-5.24,10.47-15.89,7.33-22.59-2.57-5.47-16.42-10.57-22.52-6.2-78.42,56.09-147.96,116.02-219.2,188.02-43.2-74.98-36.44-165.57,10.11-235.66,45.64-68.73,122.66-102.17,208.86-101.27,97.62,1.03,189.87-25.12,287.39-46.44-.65,183.79-16.11,368.37-188.53,469.28-84.92,49.7-187.95,44.87-266.65-20.2-29.41,28.98-54.7,61.39-74.23,99.22-11.7,4.35-27.87,3.92-47.12.22Z"/>
+            <rect fill="#4B7A3C" x="794.57" y="565.32" width="117.86" height="514.29"/>
+          </svg>
+        </div>
         <p class="eyebrow">About Kelker Pharma</p>
         <h2 class="about-h2">The manufacturing backbone behind leading supplement brands.</h2>
         <p class="about-body">At Kelker Pharma, we are the partner brands turn to when quality cannot be compromised. Our cGMP-certified facility in Riverside, CA operates at pharmaceutical-grade standards — because we believe the supplement industry deserves nothing less.</p>
@@ -1814,6 +1849,82 @@
     updateProgress();
   }
 
+</script>
+
+<!-- ════════════════ FALLING LEAF ════════════════ -->
+<svg id="kpi-falling-leaf" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="580 60 660 510">
+  <path fill="#4B7A3C" d="M626.17,548.52c19.36-101.52,222.67-263.27,304.57-324.37,7.03-5.24,10.47-15.89,7.33-22.59-2.57-5.47-16.42-10.57-22.52-6.2-78.42,56.09-147.96,116.02-219.2,188.02-43.2-74.98-36.44-165.57,10.11-235.66,45.64-68.73,122.66-102.17,208.86-101.27,97.62,1.03,189.87-25.12,287.39-46.44-.65,183.79-16.11,368.37-188.53,469.28-84.92,49.7-187.95,44.87-266.65-20.2-29.41,28.98-54.7,61.39-74.23,99.22-11.7,4.35-27.87,3.92-47.12.22Z"/>
+</svg>
+
+<script>
+/* ─── LEAF MOUSE TRAIL ───────────────────────────── */
+(function () {
+  if (window.matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce), (hover: none)').matches) return;
+
+  const leaf     = document.getElementById('kpi-falling-leaf');
+  const aboutSec = document.getElementById('about');
+  const proofEl  = document.getElementById('proof'); // green bar — fade out when cursor crosses it
+  if (!leaf) return;
+
+  const TX = 23, TY = 9;
+  const RADIUS = 52; // circular barrier — leaf orbits cursor at this distance
+
+  let cx = 0, cy = 0, cr = 0, co = 0;
+  let mx = 0, my = 0;
+  let prevCx = 0, prevCy = 0;
+  let activated = false, onPage = true;
+
+  if (aboutSec) {
+    aboutSec.addEventListener('mouseenter', () => {
+      if (!activated) {
+        activated = true;
+        cx = mx; cy = my + RADIUS; // start directly below cursor
+        prevCx = cx; prevCy = cy;
+      }
+    });
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY; onPage = true;
+  }, { passive: true });
+  document.addEventListener('mouseleave', () => { onPage = false; });
+  document.addEventListener('mouseenter', () => { onPage = true; });
+
+  function shortDelta(from, to) {
+    return ((to - from % 360) % 360 + 540) % 360 - 180;
+  }
+
+  function tick() {
+    // Circular barrier: target is always RADIUS away from cursor in the leaf's
+    // current direction — leaf can't get closer than RADIUS in any direction.
+    const dx = cx - mx, dy = cy - my;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    prevCx = cx; prevCy = cy;
+    cx += (mx + (dx / dist) * RADIUS - cx) * 0.09;
+    cy += (my + (dy / dist) * RADIUS - cy) * 0.09;
+
+    // Always face tip toward cursor — atan2 gives direction from leaf to cursor.
+    // Vine tip faces upward at 0° rotation, so +90° aligns it with the cursor.
+    const dirToCursor = Math.atan2(my - cy, mx - cx) * (180 / Math.PI);
+    cr += shortDelta(cr, dirToCursor + 25) * 0.12;
+    const wobble = Math.sin(Date.now() / 680) * 7;
+
+    // Fade out when cursor crosses into the bar / hero above — simple and clean.
+    const barBottom = proofEl ? proofEl.getBoundingClientRect().bottom : 0;
+    const aboveBar  = my < barBottom;
+    const targetO   = (activated && onPage && !aboveBar) ? 0.88 : 0;
+    co += (targetO - co) * 0.07;
+
+    leaf.style.clipPath = 'none'; // no clipping needed anymore
+    leaf.style.opacity  = co;
+    leaf.style.transform =
+      `translate3d(${cx - TX}px,${cy - TY}px,0) rotate(${cr + wobble}deg)`;
+
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+})();
 </script>
 </body>
 </html>

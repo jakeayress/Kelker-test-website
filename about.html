@@ -116,33 +116,61 @@
       padding: 10rem 0 6rem;
       position: relative;
       overflow: hidden;
+      min-height: 580px;
     }
     .page-hero::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 55% 70% at 85% 50%, rgba(75,122,60,0.12) 0%, transparent 60%),
         radial-gradient(ellipse 40% 50% at 15% 30%, rgba(28,46,23,0.5) 0%, transparent 55%);
+      z-index: 1;
     }
-    .page-hero .wrap { position: relative; }
+    .page-hero .wrap {
+      position: relative; z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
     .page-hero-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4.5rem;
       align-items: center;
+      width: 100%;
+    }
+    .page-hero-inner > div {
+      max-width: 460px;
     }
     .page-hero-img {
       width: 100%;
-      aspect-ratio: 4/3;
+      height: 100%;
       object-fit: cover;
       object-position: center;
-      border-radius: 4px;
       display: block;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .page-hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+    }
+    /* gradient blend from dark bg into photo */
+    .page-hero-img-wrap {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 50%;
+      z-index: 0;
+    }
+    .page-hero-img-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 60px;
+      background: linear-gradient(to right, var(--dark) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
     }
     @media (max-width: 900px) {
       .page-hero-inner { grid-template-columns: 1fr; }
-      .page-hero-img { display: none; }
+      .page-hero-img-wrap { display: none; }
     }
     .page-hero-kicker {
       font-family: 'Space Mono', monospace;
@@ -541,6 +569,20 @@
       color: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.08);
       padding: 0.3rem 0.7rem; border-radius: 100px;
     }
+    /* ─── LEAF ────────────────────────────────────── */
+    #kpi-falling-leaf {
+      position: fixed; top: 0; left: 0;
+      z-index: 50; pointer-events: none;
+      width: 42px; height: 33px; opacity: 0;
+      will-change: transform, opacity;
+      transform-origin: 23px 9px;
+      filter:
+        drop-shadow(0 0 7px rgba(255,255,255,0.55))
+        drop-shadow(0 3px 9px rgba(75,122,60,0.30));
+    }
+    @media (max-width: 900px), (prefers-reduced-motion: reduce), (hover: none) {
+      #kpi-falling-leaf { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -582,8 +624,10 @@
           <span>75,000 Sq Ft</span>
         </div>
       </div>
-      <img src="brand_assets/Facility Photos/Building-Outside.png" alt="Kelker Pharma facility in Riverside, California" class="page-hero-img reveal d2">
     </div>
+  </div>
+  <div class="page-hero-img-wrap">
+    <img src="brand_assets/Facility Photos/Building-Outside.png" alt="Kelker Pharma facility in Riverside, California" class="page-hero-img">
   </div>
 </section>
 
@@ -880,6 +924,50 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => io.observe(el));
+</script>
+
+<!-- ═══════════ LEAF ═══════════ -->
+<svg id="kpi-falling-leaf" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="580 60 660 510">
+  <path fill="#4B7A3C" d="M626.17,548.52c19.36-101.52,222.67-263.27,304.57-324.37,7.03-5.24,10.47-15.89,7.33-22.59-2.57-5.47-16.42-10.57-22.52-6.2-78.42,56.09-147.96,116.02-219.2,188.02-43.2-74.98-36.44-165.57,10.11-235.66,45.64-68.73,122.66-102.17,208.86-101.27,97.62,1.03,189.87-25.12,287.39-46.44-.65,183.79-16.11,368.37-188.53,469.28-84.92,49.7-187.95,44.87-266.65-20.2-29.41,28.98-54.7,61.39-74.23,99.22-11.7,4.35-27.87,3.92-47.12.22Z"/>
+</svg>
+<script>
+(function () {
+  if (window.matchMedia('(max-width: 900px), (prefers-reduced-motion: reduce), (hover: none)').matches) return;
+  const leaf    = document.getElementById('kpi-falling-leaf');
+  const heroEl  = document.querySelector('.page-hero');
+  const storySec = document.getElementById('story');
+  if (!leaf) return;
+  const TX = 23, TY = 9, RADIUS = 52;
+  let cx = 0, cy = 0, cr = 0, co = 0;
+  let mx = 0, my = 0, prevCx = 0, prevCy = 0;
+  let activated = false, onPage = true;
+  if (storySec) {
+    storySec.addEventListener('mouseenter', () => {
+      if (!activated) { activated = true; cx = mx; cy = my + RADIUS; prevCx = cx; prevCy = cy; }
+    });
+  }
+  document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; onPage = true; }, { passive: true });
+  document.addEventListener('mouseleave', () => { onPage = false; });
+  document.addEventListener('mouseenter', () => { onPage = true; });
+  function shortDelta(f, t) { return ((t - f % 360) % 360 + 540) % 360 - 180; }
+  function tick() {
+    const dx = cx - mx, dy = cy - my, dist = Math.sqrt(dx*dx + dy*dy) || 1;
+    prevCx = cx; prevCy = cy;
+    cx += (mx + (dx/dist)*RADIUS - cx) * 0.09;
+    cy += (my + (dy/dist)*RADIUS - cy) * 0.09;
+    const vx = cx-prevCx, vy = cy-prevCy, speed = Math.sqrt(vx*vx+vy*vy);
+    const dirToCursor = Math.atan2(my - cy, mx - cx) * (180 / Math.PI);
+    cr += shortDelta(cr, dirToCursor + 25) * 0.12;
+    const wobble = Math.sin(Date.now()/680)*7;
+    const heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : 0;
+    const targetO = (activated && onPage && my > heroBottom) ? 0.88 : 0;
+    co += (targetO - co) * 0.07;
+    leaf.style.opacity = co;
+    leaf.style.transform = `translate3d(${cx-TX}px,${cy-TY}px,0) rotate(${cr+wobble}deg)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
 </script>
 </body>
 </html>

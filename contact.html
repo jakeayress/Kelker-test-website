@@ -132,20 +132,30 @@
 
     /* ─── CONTACT HERO LAYOUT ───────────────────────────── */
     .contact-hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      position: relative; z-index: 2;
+      max-width: 520px;
+    }
+    .contact-hero-video-wrap {
+      position: absolute;
+      right: 3rem;
+      top: 5rem;
+      bottom: 2rem;
+      width: 46%;
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
     }
     .contact-hero-video {
       width: 100%;
-      border-radius: 8px;
-      opacity: 0.85;
+      height: 100%;
       display: block;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.92;
     }
     @media (max-width: 900px) {
-      .contact-hero-inner { grid-template-columns: 1fr; }
-      .contact-hero-graphic { display: none; }
+      .contact-hero-video-wrap { display: none; }
+      .contact-hero-inner { max-width: 100%; }
     }
 
     /* ─── MAIN CONTENT ───────────────────────────────────── */
@@ -442,30 +452,26 @@
 <section class="page-hero">
   <div class="wrap">
     <div class="contact-hero-inner">
-
-      <!-- LEFT: text -->
-      <div>
-        <p class="page-hero-kicker reveal">Get in Touch</p>
-        <h1 class="page-hero-h1 reveal d1">Start a Project.<br><em>Let's build something great.</em></h1>
-        <p class="page-hero-sub reveal d2">Tell us about your product and goals — we'll respond with a clear path forward and a quote within 48 hours. No jargon, no runaround.</p>
-        <div class="hero-promise reveal d3">
-          <span class="hero-promise-dot"></span>
-          <span>Response within 48 hours</span>
-        </div>
+      <p class="page-hero-kicker reveal">Get in Touch</p>
+      <h1 class="page-hero-h1 reveal d1">Start a Project.<br><em>Let's build something great.</em></h1>
+      <p class="page-hero-sub reveal d2">Tell us about your product and goals — we'll respond with a clear path forward and a quote within 48 hours. No jargon, no runaround.</p>
+      <div class="hero-promise reveal d3">
+        <span class="hero-promise-dot"></span>
+        <span>Response within 48 hours</span>
       </div>
-
-      <!-- RIGHT: process animation (desktop only) -->
-      <video
-        class="contact-hero-video reveal d2"
-        src="brand_assets/ProcessAnimation.mp4"
-        autoplay
-        loop
-        muted
-        playsinline
-        aria-hidden="true"
-      ></video>
-
     </div>
+  </div>
+  <!-- RIGHT: process animation — full-height right panel -->
+  <div class="contact-hero-video-wrap">
+    <video
+      class="contact-hero-video"
+      src="brand_assets/ProcessAnimation.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"
+    ></video>
   </div>
 </section>
 
