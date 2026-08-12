@@ -138,20 +138,21 @@
     .contact-hero-video-wrap {
       position: absolute;
       right: 3rem;
-      top: 5rem;
-      bottom: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
       width: 46%;
+      aspect-ratio: 16/9;
+      max-height: calc(100% - 4rem);
       z-index: 1;
       border-radius: 10px;
       overflow: hidden;
     }
     .contact-hero-video {
-      /* Manual cover: consistent across all browsers/zoom levels */
       position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 100%; min-height: 100%;
-      width: auto; height: auto;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
       display: block;
       opacity: 0.92;
     }
